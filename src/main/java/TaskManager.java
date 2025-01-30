@@ -11,6 +11,9 @@ public class TaskManager {
 
     public void addDeadline(String second) {
         String[] parts = second.split("/");
+        if (parts.length != 2) {
+            return;
+        }
         String description = parts[0];
         String by = parts[1];
         Deadline d = new Deadline(description, by);
@@ -20,6 +23,9 @@ public class TaskManager {
 
     public void addEvent(String second) {
         String[] parts = second.split("/");
+        if (parts.length != 3) {
+            return;
+        }
         String description = parts[0];
         String start = parts[1];
         String end = parts[2];

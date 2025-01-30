@@ -22,14 +22,16 @@ public class Clank {
             input = input.toLowerCase();
             String[] splitted = input.split(" ", 2);
             String first = splitted[0];
-            String second = splitted[1];
+            String second = "";
+            if (splitted.length == 2) {
+                second = splitted[1];
+            }
 
             System.out.println(line);
 
             switch (first) {
             case "bye":
                 System.out.println(byeMessage);
-                System.exit(0);
                 break;
             case "list":
                 taskManager.list();
