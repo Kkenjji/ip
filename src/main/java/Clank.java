@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Clank {
-    private static ArrayList<String> messages = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String line = "____________________________________________________________\n";
@@ -22,17 +22,37 @@ public class Clank {
 
             System.out.println(line);
 
-            if (input.equalsIgnoreCase("bye")) {
+            switch (input) {
+            case "bye":
                 System.out.println(byeMessage);
                 break;
-            } else if (input.equalsIgnoreCase("list")) {
-                for (int i = 0; i < messages.size(); i++) {
+            case "list":
+                for (int i = 0; i < tasks.size(); i++) {
                     int index = i + 1;
-                    System.out.println(index + ". " + messages.get(i));
+                    Task t = tasks.get(i);
+                    System.out.println(index + ".[" + t.getStatusIcon() + "] " + t.getDescription());
                 }
-            } else {
-                messages.add(input);
-                System.out.println("added: " + input);
+                break;
+            default:
+                if (input.startsWith("mark ")) {
+                    String[] splitted = input.split(" ");
+                    if (splitted.length == 2) {
+                        int taskIndex = Integer.parseInt(splitted[1]);
+                        tasks.get(taskIndex - 1).mark();
+                        System.out.println("Marked " + taskIndex + " as done.");
+                    }
+                } else if (input.startsWith("unmark ")) {
+                    String[] splitted = input.split(" ");
+                    if (splitted.length == 2) {
+                        int taskIndex = Integer.parseInt(splitted[1]);
+                        tasks.get(taskIndex - 1).unmark();
+                        System.out.println("Unmarked " + taskIndex + ".");
+                    }
+                } else {
+                    Task t = new Task(input);
+                    tasks.add(t);
+                    System.out.println("added: " + input);
+                }
             }
 
             System.out.println(line);
