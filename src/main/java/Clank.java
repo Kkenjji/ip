@@ -25,6 +25,7 @@ public class Clank {
             switch (input) {
             case "bye":
                 System.out.println(byeMessage);
+                System.exit(0);
                 break;
             case "list":
                 for (int i = 0; i < tasks.size(); i++) {
