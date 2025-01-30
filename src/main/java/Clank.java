@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Clank {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
         String line = "____________________________________________________________\n";
@@ -19,41 +19,36 @@ public class Clank {
 
         while (true) {
             input = scanner.nextLine();
+            input = input.toLowerCase();
+            String[] splitted = input.split(" ", 2);
+            String first = splitted[0];
+            String second = splitted[1];
 
             System.out.println(line);
 
-            switch (input) {
+            switch (first) {
             case "bye":
                 System.out.println(byeMessage);
                 System.exit(0);
                 break;
             case "list":
-                for (int i = 0; i < tasks.size(); i++) {
-                    int index = i + 1;
-                    Task t = tasks.get(i);
-                    System.out.println(index + ".[" + t.getStatusIcon() + "] " + t.getDescription());
-                }
+                taskManager.list();
                 break;
-            default:
-                if (input.startsWith("mark ")) {
-                    String[] splitted = input.split(" ");
-                    if (splitted.length == 2) {
-                        int taskIndex = Integer.parseInt(splitted[1]);
-                        tasks.get(taskIndex - 1).mark();
-                        System.out.println("Marked " + taskIndex + " as done.");
-                    }
-                } else if (input.startsWith("unmark ")) {
-                    String[] splitted = input.split(" ");
-                    if (splitted.length == 2) {
-                        int taskIndex = Integer.parseInt(splitted[1]);
-                        tasks.get(taskIndex - 1).unmark();
-                        System.out.println("Unmarked " + taskIndex + ".");
-                    }
-                } else {
-                    Task t = new Task(input);
-                    tasks.add(t);
-                    System.out.println("added: " + input);
-                }
+            case "mark":
+                taskManager.mark(second);
+                break;
+            case "unmark":
+                taskManager.unmark(second);
+                break;
+            case "todo":
+                taskManager.addTodo(second);
+                break;
+            case "deadline":
+                taskManager.addDeadline(second);
+                break;
+            case "event":
+                taskManager.addEvent(second);
+                break;
             }
 
             System.out.println(line);
