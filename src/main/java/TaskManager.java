@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -10,7 +11,7 @@ public class TaskManager {
 
         Todo t = new Todo(description);
         tasks.add(t);
-        System.out.println("I've added \"" + description + "\"as a todo!");
+        System.out.println("I've added \"" + description + "\" as a todo!");
         System.out.println("Check it out!");
         list();
     }
@@ -30,7 +31,7 @@ public class TaskManager {
         String by = parts[1];
         Deadline d = new Deadline(description, by);
         tasks.add(d);
-        System.out.println("I've added \"" + description + "\"as a task with deadline!");
+        System.out.println("I've added \"" + description + "\" as a task with deadline!");
         System.out.println("It is to be completed by " + by + ".");
         System.out.println("Check it out!");
         list();
@@ -52,7 +53,7 @@ public class TaskManager {
         String end = parts[2];
         Event e = new Event(description, start, end);
         tasks.add(e);
-        System.out.println("I've added \"" + description + "\"as an event!");
+        System.out.println("I've added \"" + description + "\" as an event!");
         System.out.println("It is from " + start + " to " + end + ".");
         System.out.println("Check it out!");
         list();
@@ -71,10 +72,27 @@ public class TaskManager {
     }
 
     public void list() {
-        for (int i = 0; i < tasks.size(); i++) {
-            int index = i + 1;
-            Task t = tasks.get(i);
-            System.out.println(index + "." + t);
+        if (tasks.isEmpty()) {
+            System.out.println("You currently have no task!");
+        } else {
+            System.out.println("Here are your current tasks:");
+            for (int i = 0; i < tasks.size(); i++) {
+                int index = i + 1;
+                Task t = tasks.get(i);
+                System.out.println(index + "." + t);
+            }
+        }
+    }
+
+    public void deleteTask(String second) throws InvalidTaskIndexException {
+        try {
+            int taskIndex = Integer.parseInt(second);
+            tasks.remove(taskIndex - 1);
+            System.out.println("I've successfully deleted task " + taskIndex +
+                    ". Here are your remaining tasks.");
+            list();
+        } catch (Exception e) {
+            throw new InvalidTaskIndexException();
         }
     }
 }

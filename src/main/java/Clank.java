@@ -36,6 +36,9 @@ public class Clank {
                 case "list":
                     taskManager.list();
                     break;
+                case "delete":
+                    taskManager.deleteTask(second);
+                    break;
                 case "mark":
                     taskManager.mark(second);
                     break;
