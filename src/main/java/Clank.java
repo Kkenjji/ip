@@ -20,38 +20,44 @@ public class Clank {
         while (true) {
             input = scanner.nextLine();
             input = input.toLowerCase();
+
             String[] splitted = input.split(" ", 2);
             String first = splitted[0];
-            String second = "";
-            if (splitted.length == 2) {
-                second = splitted[1];
-            }
+            String second = (splitted.length == 2) ? splitted[1] : "";
 
             System.out.println(line);
 
-            switch (first) {
-            case "bye":
-                System.out.println(byeMessage);
-                System.exit(0);
-                break;
-            case "list":
-                taskManager.list();
-                break;
-            case "mark":
-                taskManager.mark(second);
-                break;
-            case "unmark":
-                taskManager.unmark(second);
-                break;
-            case "todo":
-                taskManager.addTodo(second);
-                break;
-            case "deadline":
-                taskManager.addDeadline(second);
-                break;
-            case "event":
-                taskManager.addEvent(second);
-                break;
+            try {
+                switch (first) {
+                case "bye":
+                    System.out.println(byeMessage);
+                    System.exit(0);
+                    break;
+                case "list":
+                    taskManager.list();
+                    break;
+                case "mark":
+                    taskManager.mark(second);
+                    break;
+                case "unmark":
+                    taskManager.unmark(second);
+                    break;
+                case "todo":
+                    taskManager.addTodo(second);
+                    break;
+                case "deadline":
+                    taskManager.addDeadline(second);
+                    break;
+                case "event":
+                    taskManager.addEvent(second);
+                    break;
+                default:
+                    throw new UnknownCommandException(first);
+                }
+            } catch (ClankException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("An unexpected error occured: " + e.getMessage());
             }
 
             System.out.println(line);
