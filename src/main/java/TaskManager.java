@@ -6,7 +6,9 @@ public class TaskManager {
     public void addTodo(String description) {
         Todo t = new Todo(description);
         tasks.add(t);
-        System.out.println("added: " + description);
+        System.out.println("I've added " + description + " as a todo!");
+        System.out.println("Check it out!");
+        list();
     }
 
     public void addDeadline(String second) {
@@ -18,7 +20,10 @@ public class TaskManager {
         String by = parts[1];
         Deadline d = new Deadline(description, by);
         tasks.add(d);
-        System.out.println("added: " + description);
+        System.out.println("I've added " + description + " as a task with deadline!");
+        System.out.println("It is to be completed by " + by + ".");
+        System.out.println("Check it out!");
+        list();
     }
 
     public void addEvent(String second) {
@@ -31,7 +36,10 @@ public class TaskManager {
         String end = parts[2];
         Event e = new Event(description, start, end);
         tasks.add(e);
-        System.out.println("added: " + description);
+        System.out.println("I've added " + description + " as an event!");
+        System.out.println("It is from " + start + " to " + end + ".");
+        System.out.println("Check it out!");
+        list();
     }
 
     public void mark(String second) {

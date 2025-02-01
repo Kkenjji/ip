@@ -32,6 +32,7 @@ public class Clank {
             switch (first) {
             case "bye":
                 System.out.println(byeMessage);
+                System.exit(0);
                 break;
             case "list":
                 taskManager.list();
