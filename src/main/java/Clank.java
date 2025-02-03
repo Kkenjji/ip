@@ -1,18 +1,19 @@
+import javax.swing.*;
+import java.io.File;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Clank {
-    private static TaskManager taskManager = new TaskManager();
+    private static final String LINE = "____________________________________________________________\n";
+    private static final String WELCOME_MESSAGE = " Greetings! I'm Clank, Ratchet's best friend.\n" +
+            " I heard you are in trouble, and I'm here to help.\n" +
+            " How may I assist you?\n" +
+            LINE;
+    private static final String BYE_MESSAGE = " Bye. Hope to see you again soon!\n";
+    private static final String FILE_PATH = "./data/clank.txt";
+    private static final TaskManager taskManager = new TaskManager(FILE_PATH);
 
     public static void main(String[] args) {
-        String line = "____________________________________________________________\n";
-        String welcomeMessage = " Greetings! I'm Clank, Ratchet's best friend.\n" +
-                " I heard you are in trouble, and I'm here to help.\n" +
-                " How may I assist you?\n" +
-                line;
-
-        String byeMessage = " Bye. Hope to see you again soon!\n";
-        System.out.println(welcomeMessage);
+        System.out.println(WELCOME_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -25,16 +26,20 @@ public class Clank {
             String first = splitted[0];
             String second = (splitted.length == 2) ? splitted[1] : "";
 
-            System.out.println(line);
+            System.out.println(LINE);
 
             try {
                 switch (first) {
                 case "bye":
-                    System.out.println(byeMessage);
+                    scanner.close();
+                    System.out.println(BYE_MESSAGE);
                     System.exit(0);
                     break;
                 case "list":
                     taskManager.list();
+                    break;
+                case "save":
+                    taskManager.save();
                     break;
                 case "delete":
                     taskManager.deleteTask(second);
@@ -60,10 +65,10 @@ public class Clank {
             } catch (ClankException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
-                System.out.println("An unexpected error occured: " + e.getMessage());
+                System.out.println("An unexpected error occurred: " + e.getMessage());
             }
 
-            System.out.println(line);
+            System.out.println(LINE);
         }
     }
 }

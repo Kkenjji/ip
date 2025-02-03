@@ -1,0 +1,4 @@
+T|true|123
+T|false|sleep
+D|false|homework |monday
+T|true|hangout |2pm |4pm
