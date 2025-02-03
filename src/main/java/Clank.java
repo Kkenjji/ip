@@ -40,6 +40,7 @@ public class Clank {
                     break;
                 case "save":
                     taskManager.save();
+                    System.out.println("Saved successfully!");
                     break;
                 case "delete":
                     taskManager.deleteTask(second);
