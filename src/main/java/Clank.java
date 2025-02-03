@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.io.File;
 import java.util.Scanner;
 
 public class Clank {
@@ -7,7 +9,8 @@ public class Clank {
             " How may I assist you?\n" +
             LINE;
     private static final String BYE_MESSAGE = " Bye. Hope to see you again soon!\n";
-    private static final TaskManager taskManager = new TaskManager();
+    private static final String FILE_PATH = "./data/clank.txt";
+    private static final TaskManager taskManager = new TaskManager(FILE_PATH);
 
     public static void main(String[] args) {
         System.out.println(WELCOME_MESSAGE);
@@ -28,11 +31,15 @@ public class Clank {
             try {
                 switch (first) {
                 case "bye":
+                    scanner.close();
                     System.out.println(BYE_MESSAGE);
                     System.exit(0);
                     break;
                 case "list":
                     taskManager.list();
+                    break;
+                case "save":
+                    taskManager.save();
                     break;
                 case "delete":
                     taskManager.deleteTask(second);
@@ -58,7 +65,7 @@ public class Clank {
             } catch (ClankException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
-                System.out.println("An unexpected error occured: " + e.getMessage());
+                System.out.println("An unexpected error occurred: " + e.getMessage());
             }
 
             System.out.println(LINE);
