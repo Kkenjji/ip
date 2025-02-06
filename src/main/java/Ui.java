@@ -10,7 +10,7 @@ public class Ui {
     public void showWelcomeMessage() {
         System.out.println("Greetings! I'm Clank, Ratchet's best friend.\n"
                 + "I heard you are in trouble, and I'm here to help.\n"
-                + "How may I assist you?\n");
+                + "How may I assist you?");
     }
 
     public void showLine() {

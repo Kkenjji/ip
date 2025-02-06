@@ -15,60 +15,8 @@ public class TaskList {
         return tasks;
     }
 
-    public void addTodo(String details) throws EmptyDescriptionException {
-        if (details.equals("")) {
-            throw new EmptyDescriptionException("todo");
-        }
-
-        String description = details.trim();
-        Todo todo = new Todo(description);
-        tasks.add(todo);
-        System.out.println("I've added \"" + details + "\" as a todo!");
-        System.out.println("Check it out!");
-        listTasks();
-    }
-
-    public void addDeadline(String details) throws EmptyDescriptionException, DeadlineInvalidDateException {
-        if (details.equals("")) {
-            throw new EmptyDescriptionException("deadline");
-        }
-
-        String[] parts = details.split("/by");
-
-        if (parts.length < 2) {
-            throw new DeadlineInvalidDateException("deadline");
-        }
-
-        String description = parts[0].trim();
-        String by = parts[1].trim();
-        Deadline deadline = new Deadline(description, by);
-        tasks.add(deadline);
-        System.out.println("I've added \"" + description + "\" as a task with deadline!");
-        System.out.println("It is to be completed by " + by + ".");
-        System.out.println("Check it out!");
-        listTasks();
-    }
-
-    public void addEvent(String details) throws EmptyDescriptionException, EventInvalidDateException {
-        if (details.equals("")) {
-            throw new EmptyDescriptionException("event");
-        }
-
-        String[] parts = details.split("/from | /to");
-
-        if (parts.length < 3) {
-            throw new EventInvalidDateException("event");
-        }
-
-        String description = parts[0].trim();
-        String start = parts[1].trim();
-        String end = parts[2].trim();
-        Event event = new Event(description, start, end);
-        tasks.add(event);
-        System.out.println("I've added \"" + description + "\" as an event!");
-        System.out.println("It is from " + start + " to " + end + ".");
-        System.out.println("Check it out!");
-        listTasks();
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     public void mark(String second) {
