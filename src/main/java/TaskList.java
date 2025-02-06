@@ -19,16 +19,20 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void mark(String second) {
-        int taskIndex = Integer.parseInt(second);
-        tasks.get(taskIndex - 1).mark();
-        System.out.println("Marked " + taskIndex + " as done.");
+    public void markTask(int index) {
+        if (index < 0 || index > tasks.size()) {
+            throw new InvalidFormatException();
+        }
+        tasks.get(index).mark();
+        System.out.println("Marked " + index + " as done.");
     }
 
-    public void unmark(String second) {
-        int taskIndex = Integer.parseInt(second);
-        tasks.get(taskIndex - 1).unmark();
-        System.out.println("Unmarked " + taskIndex + ".");
+    public void unmarkTask(int index) {
+        if (index < 0 || index > tasks.size()) {
+            throw new InvalidFormatException();
+        }
+        tasks.get(index).unmark();
+        System.out.println("Unmarked " + index + ".");
     }
 
     public void listTasks() {
@@ -44,18 +48,14 @@ public class TaskList {
         }
     }
 
-    public void deleteTask(String second) throws InvalidTaskIndexException {
-        try {
-            int taskIndex = Integer.parseInt(second);
-            if (taskIndex <= 0 || taskIndex > tasks.size()) {
-                throw new InvalidTaskIndexException();
-            }
-            tasks.remove(taskIndex - 1);
-            System.out.println("I've successfully deleted task " + taskIndex +
-                    ". Here are your remaining tasks.");
-            listTasks();
-        } catch (Exception e) {
-            throw new InvalidTaskIndexException();
+    public void deleteTask(int index, boolean toDeleteAll) throws InvalidFormatException {
+        if (toDeleteAll) {
+            tasks.clear();
+        } else if (index < 0 || index > tasks.size()) {
+            throw new InvalidFormatException();
         }
+        tasks.remove(index);
+        System.out.println("I've successfully deleted task " + index +
+                ". Here are your remaining tasks.");
     }
 }

@@ -1,7 +1,7 @@
 public class AddCommand extends Command {
     private final Task task;
 
-    public AddCommand(String input) {
+    public AddCommand(String input) throws EmptyDescriptionException {
         String[] parts = input.split(" ", 2);
 
         String mainCommand = parts[0].toLowerCase();

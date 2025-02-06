@@ -6,10 +6,10 @@ public class Parser {
         return switch (mainCommand) {
             case "bye" -> new ByeCommand();
             case "list" -> new ListCommand();
-            case "mark" -> new MarkCommand();
-            case "unmark" -> new UnmarkCommand();
             case "save" -> new SaveCommand();
-            case "delete" -> new DeleteCommand();
+            case "mark" -> new MarkCommand(input);
+            case "unmark" -> new UnmarkCommand(input);
+            case "delete" -> new DeleteCommand(input);
             case "todo", "deadline", "event" -> new AddCommand(input);
             default -> throw new UnknownCommandException(mainCommand);
         };
