@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,47 +9,48 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    private void createFile(){
+    public void saveTasks(ArrayList<Task> tasks) {
         try {
             File file = new File(filePath);
             File directory = file.getParentFile();
+
             if (directory != null && !directory.exists()) {
                 directory.mkdirs();
             }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-        }
-    }
 
-    public void saveTasks(ArrayList<Task> tasks) {
-        try {
-            createFile();
             FileWriter fw = new FileWriter(filePath);
-            for (Task t : tasks) {
-                fw.write(t.toSaveFormat() + "\n");
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Task task : tasks) {
+                bw.write(task.toSaveFormat());
+                bw.newLine();
             }
-            fw.close();
+            bw.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ClankException("Failed to save tasks.");
         }
     }
 
-    public ArrayList<Task> loadTasks() throws FileNotFoundException {
+    public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
-        createFile();
-        File file = new File(filePath);
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNextLine()) {
-            String data = scanner.nextLine();
-            Task task = Task.fromSavedFormat(data);
-            if (task != null) {
-                tasks.add(task);
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return tasks;
             }
+
+            Scanner scanner = new Scanner(file);
+            String line;
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                Task task = Task.fromSavedFormat(line);
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+            scanner.close();
+        } catch (IOException e) {
+            throw new ClankException("Failed to load tasks.");
         }
-        scanner.close();
         return tasks;
     }
 }

@@ -1,4 +1,4 @@
-T|true|123
-T|false|sleep
-D|false|homework |monday
-T|true|hangout 
+T|false|study
+T|false|hangout
+D|false|sleep|1/1/2020 0000
+T|false|drink|1/1/2020 0100|1/1/2020 0300
