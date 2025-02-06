@@ -1,73 +1,62 @@
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class TaskManager {
     private ArrayList<Task> tasks;
-    private Storage storage;
 
-    public TaskManager(String filePath){
-        storage = new Storage(filePath);
-        try {
-            this.tasks = storage.loadTasks();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+    public TaskManager(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
-    public void addTodo(String description) throws EmptyDescriptionException {
-        if (description.equals("")) {
+    public void addTodo(String details) throws EmptyDescriptionException {
+        if (details.equals("")) {
             throw new EmptyDescriptionException("todo");
         }
 
+        String description = details.trim();
         Todo todo = new Todo(description);
         tasks.add(todo);
-        save();
-        System.out.println("I've added \"" + description + "\" as a todo!");
+        System.out.println("I've added \"" + details + "\" as a todo!");
         System.out.println("Check it out!");
         list();
     }
 
-    public void addDeadline(String second) throws EmptyDescriptionException, DeadlineInvalidDateException {
-        if (second.equals("")) {
+    public void addDeadline(String details) throws EmptyDescriptionException, DeadlineInvalidDateException {
+        if (details.equals("")) {
             throw new EmptyDescriptionException("deadline");
         }
 
-        String[] parts = second.split("/");
+        String[] parts = details.split("/by");
 
-        if (parts.length != 2) {
+        if (parts.length < 2) {
             throw new DeadlineInvalidDateException("deadline");
         }
 
-        String description = parts[0];
-        String by = parts[1];
+        String description = parts[0].trim();
+        String by = parts[1].trim();
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
-        save();
         System.out.println("I've added \"" + description + "\" as a task with deadline!");
         System.out.println("It is to be completed by " + by + ".");
         System.out.println("Check it out!");
         list();
     }
 
-    public void addEvent(String second) throws EmptyDescriptionException, EventInvalidDateException {
-        if (second.equals("")) {
+    public void addEvent(String details) throws EmptyDescriptionException, EventInvalidDateException {
+        if (details.equals("")) {
             throw new EmptyDescriptionException("event");
         }
 
-        String[] parts = second.split("/");
+        String[] parts = details.split("/from | /to");
 
-        if (parts.length != 3) {
+        if (parts.length < 3) {
             throw new EventInvalidDateException("event");
         }
 
-        String description = parts[0];
-        String start = parts[1];
-        String end = parts[2];
+        String description = parts[0].trim();
+        String start = parts[1].trim();
+        String end = parts[2].trim();
         Event event = new Event(description, start, end);
         tasks.add(event);
-        save();
         System.out.println("I've added \"" + description + "\" as an event!");
         System.out.println("It is from " + start + " to " + end + ".");
         System.out.println("Check it out!");
@@ -77,14 +66,12 @@ public class TaskManager {
     public void mark(String second) {
         int taskIndex = Integer.parseInt(second);
         tasks.get(taskIndex - 1).mark();
-        save();
         System.out.println("Marked " + taskIndex + " as done.");
     }
 
     public void unmark(String second) {
         int taskIndex = Integer.parseInt(second);
         tasks.get(taskIndex - 1).unmark();
-        save();
         System.out.println("Unmarked " + taskIndex + ".");
     }
 
@@ -107,14 +94,9 @@ public class TaskManager {
             tasks.remove(taskIndex - 1);
             System.out.println("I've successfully deleted task " + taskIndex +
                     ". Here are your remaining tasks.");
-            save();
             list();
         } catch (Exception e) {
             throw new InvalidTaskIndexException();
         }
-    }
-
-    public void save() {
-        storage.saveTasks(tasks);
     }
 }

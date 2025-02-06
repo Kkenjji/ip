@@ -46,7 +46,7 @@ public abstract class Task {
             Task task = null;
             switch (type) {
             case "T":
-                Task todo = new Todo(description);
+                task = new Todo(description);
                 break;
             case "D":
                 if (parts.length < 4) {
@@ -54,7 +54,7 @@ public abstract class Task {
                     return null;
                 }
                 String by = parts[3];
-                Task deadline = new Deadline(description, by);
+                task = new Deadline(description, by);
                 break;
             case "E":
                 if (parts.length < 5) {
@@ -63,7 +63,7 @@ public abstract class Task {
                 }
                 String start = parts[3];
                 String end = parts[4];
-                Task event = new Event(description, start, end);
+                task = new Event(description, start, end);
                 break;
             default:
                 System.out.println("Unknown task type.");
