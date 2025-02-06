@@ -9,7 +9,8 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void saveTasks(ArrayList<Task> tasks) {
+    public void saveTasks(TaskList taskList) {
+        ArrayList<Task> tasks = taskList.getTasks();
         try {
             File file = new File(filePath);
             File directory = file.getParentFile();
