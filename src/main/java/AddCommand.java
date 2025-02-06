@@ -1,7 +1,7 @@
 public class AddCommand extends Command {
     private final Task task;
 
-    public AddCommand(String input) throws EmptyDescriptionException {
+    public AddCommand(String input) {
         String[] parts = input.split(" ", 2);
 
         String mainCommand = parts[0].toLowerCase();
@@ -10,7 +10,7 @@ public class AddCommand extends Command {
 
         switch (mainCommand) {
         case "todo":
-            if (details.length > 1 || details[0].trim().isEmpty()) {
+            if (details.length < 1 || details[0].trim().isEmpty()) {
                 throw new EmptyDescriptionException("A description is needed for a task! "
                         + "The correct format is: 'todo description'");
             }
@@ -21,7 +21,7 @@ public class AddCommand extends Command {
             System.out.println("Check it out!");
             break;
         case "deadline":
-            if (details.length > 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
+            if (details.length < 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
                 throw new EmptyDescriptionException("A description is needed for a task! "
                         + "The correct format is: 'todo description'");
             }
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             System.out.println("Check it out!");
             break;
         case "event":
-            if (details.length > 3 || details[0].trim().isEmpty() || details[1].trim().isEmpty()
+            if (details.length < 3 || details[0].trim().isEmpty() || details[1].trim().isEmpty()
                     || details[2].trim().isEmpty()) {
                 throw new EmptyDescriptionException("A description is needed for a task! "
                         + "The correct format is: 'todo description'");
@@ -47,6 +47,7 @@ public class AddCommand extends Command {
             System.out.println("I've added \"" + description + "\" as an event!");
             System.out.println("It is from " + start + " to " + end + ".");
             System.out.println("Check it out!");
+            break;
         default:
             throw new ClankException("Unknown task type.");
         }

@@ -1,5 +1,5 @@
 public class MarkCommand extends Command {
-    private final int index;
+    private int index;
 
     public MarkCommand(String input) {
         try {
@@ -9,16 +9,16 @@ public class MarkCommand extends Command {
             }
             this.index = Integer.parseInt(parts[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException();
+            System.out.println("Oh no! That's not a number!");
         }
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.markTask(index);
-        } catch (InvalidFormatException e) {
-            System.out.println(e.getMessage());
+            taskList.mark(index);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please specify a valid index!");
         }
     }
 }

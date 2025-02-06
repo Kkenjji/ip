@@ -19,22 +19,6 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void markTask(int index) {
-        if (index < 0 || index > tasks.size()) {
-            throw new InvalidFormatException();
-        }
-        tasks.get(index).mark();
-        System.out.println("Marked " + index + " as done.");
-    }
-
-    public void unmarkTask(int index) {
-        if (index < 0 || index > tasks.size()) {
-            throw new InvalidFormatException();
-        }
-        tasks.get(index).unmark();
-        System.out.println("Unmarked " + index + ".");
-    }
-
     public void listTasks() {
         if (tasks.isEmpty()) {
             System.out.println("You currently have no task!");
@@ -48,14 +32,31 @@ public class TaskList {
         }
     }
 
+    public void mark(int index) {
+        if ((index < 0) || (index > (tasks.size() - 1))) {
+            throw new IndexOutOfBoundsException();
+        }
+        tasks.get(index).mark();
+        System.out.println("Marked " + index + " as done.");
+    }
+
+    public void unmark(int index) {
+        if ((index < 0) || (index > (tasks.size() - 1))) {
+            throw new IndexOutOfBoundsException();
+        }
+        tasks.get(index).unmark();
+        System.out.println("Unmarked " + index + ".");
+    }
+
     public void deleteTask(int index, boolean toDeleteAll) throws InvalidFormatException {
         if (toDeleteAll) {
             tasks.clear();
-        } else if (index < 0 || index > tasks.size()) {
-            throw new InvalidFormatException();
+        } else if ((index < 0) || (index > (tasks.size() - 1))) {
+            throw new IndexOutOfBoundsException();
         }
         tasks.remove(index);
         System.out.println("I've successfully deleted task " + index +
                 ". Here are your remaining tasks.");
+        listTasks();
     }
 }

@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command {
-    private final int index;
+    private int index;
     private boolean toDeleteAll = false;
 
     public DeleteCommand(String input) {
@@ -8,13 +8,12 @@ public class DeleteCommand extends Command {
             if (parts.length != 2) {
                 throw new InvalidFormatException();
             }
-
-            if (parts[1].equals("all")) {
+            if (parts[1].toLowerCase().equals("all")) {
                 toDeleteAll = true;
             }
             this.index = Integer.parseInt(parts[1]) - 1;
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException();
+            System.out.println("Oh no! That's not a number!");
         }
     }
 
@@ -22,8 +21,8 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             taskList.deleteTask(index, toDeleteAll);
-        } catch (InvalidFormatException e) {
-            System.out.println(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please specify a valid index!");
         }
     }
 }
