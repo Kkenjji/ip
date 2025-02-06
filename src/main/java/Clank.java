@@ -35,7 +35,7 @@ public class Clank {
                     System.out.println(BYE_MESSAGE);
                     break;
                 case "list":
-                    taskManager.list();
+                    taskManager.listTasks();
                     break;
                 case "save":
                     storage.saveTasks(tasks);
