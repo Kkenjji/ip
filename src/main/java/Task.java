@@ -7,40 +7,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public abstract String toSaveFormat();
-
-    public static Task fromSavedFormat(String data) {
-        String[] parts = data.split("\\|");
-        String type = parts[0];
-        boolean isDone = Boolean.parseBoolean(parts[1]);
-        String description = parts[2];
-        switch (type) {
-        case "T":
-            Task todo = new Todo(description);
-            if (isDone) {
-                todo.mark();
-            }
-            return todo;
-        case "D":
-            String by = parts[3];
-            Task deadline = new Deadline(description, by);
-            if (isDone) {
-                deadline.mark();
-            }
-            return deadline;
-        case "E":
-            String start = parts[3];
-            String end = parts[4];
-            Task event = new Event(description, start, end);
-            if (isDone) {
-                event.mark();
-            }
-            return event;
-        default:
-            return null;
-        }
-    }
-
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -60,5 +26,57 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
+    }
+
+    public abstract String toSaveFormat();
+
+    public static Task fromSavedFormat(String line) {
+        String[] parts = line.split("\\|");
+
+        if (parts.length < 3) {
+            System.out.println("Corrupted task.");
+            return null;
+        }
+
+        try {
+            String type = parts[0];
+            boolean isDone = Boolean.parseBoolean(parts[1]);
+            String description = parts[2];
+
+            Task task = null;
+            switch (type) {
+            case "T":
+                Task todo = new Todo(description);
+                break;
+            case "D":
+                if (parts.length < 4) {
+                    System.out.println("Corrupted deadline task. Date is missing.");
+                    return null;
+                }
+                String by = parts[3];
+                Task deadline = new Deadline(description, by);
+                break;
+            case "E":
+                if (parts.length < 5) {
+                    System.out.println("Corrupted event task. Dates are missing.");
+                    return null;
+                }
+                String start = parts[3];
+                String end = parts[4];
+                Task event = new Event(description, start, end);
+                break;
+            default:
+                System.out.println("Unknown task type.");
+            }
+
+            if (isDone) {
+                task.mark();
+            }
+
+            return task;
+        } catch (Exception e) {
+            System.out.println("Corrupted task.");
+            return null;
+        }
     }
 }
