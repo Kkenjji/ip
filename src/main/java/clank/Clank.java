@@ -1,3 +1,12 @@
+package clank;
+
+import clank.command.Command;
+import clank.exception.ClankException;
+import clank.task.TaskList;
+import clank.utility.Parser;
+import clank.utility.Storage;
+import clank.utility.Ui;
+
 public class Clank {
     private Storage storage;
     private TaskList taskList;

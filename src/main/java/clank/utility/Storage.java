@@ -1,3 +1,9 @@
+package clank.utility;
+
+import clank.exception.ClankException;
+import clank.task.Task;
+import clank.task.TaskList;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;

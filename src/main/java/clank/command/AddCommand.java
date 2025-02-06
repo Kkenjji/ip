@@ -1,3 +1,16 @@
+package clank.command;
+
+
+import clank.task.Deadline;
+import clank.task.Event;
+import clank.task.Task;
+import clank.task.TaskList;
+import clank.task.Todo;
+import clank.exception.EmptyDescriptionException;
+import clank.exception.ClankException;
+import clank.utility.Ui;
+import clank.utility.Storage;
+
 public class AddCommand extends Command {
     private final Task task;
 

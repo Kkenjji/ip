@@ -1,22 +1,24 @@
+package clank.task;
+
+import clank.exception.ClankException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class Deadline extends Task {
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER =
             DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
 
-    protected LocalDateTime start;
-    protected LocalDateTime end;
+    protected LocalDateTime by;
 
-    public Event(String description, String start, String end) {
+    public Deadline(String description, String by) {
         super(description);
         try {
-            this.start = parseDateTime(start);
-            this.end = parseDateTime(end);
+            this.by = parseDateTime(by);
         } catch (DateTimeParseException e) {
-            throw new ClankException("Error parsing event");
+            throw new ClankException("Error parsing deadline");
         }
     }
 
@@ -26,13 +28,11 @@ public class Event extends Task {
 
     @Override
     public String toSaveFormat() {
-        return "T|" + isDone + "|" + description
-                + "|" + start.format(INPUT_FORMATTER) + "|" + end.format(INPUT_FORMATTER);
+        return "D|" + isDone + "|" + description + "|" + by.format(INPUT_FORMATTER);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start.format(OUTPUT_FORMATTER)
-                + " to: " + end.format(OUTPUT_FORMATTER) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(OUTPUT_FORMATTER) + ")";
     }
 }
