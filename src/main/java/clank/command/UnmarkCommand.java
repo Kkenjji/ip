@@ -5,10 +5,19 @@ import clank.utility.Ui;
 import clank.utility.Storage;
 import clank.exception.InvalidFormatException;
 
+/**
+ * Represents a command to unmark a task as not done.
+ */
 public class UnmarkCommand extends Command {
     private int index;
 
-    public UnmarkCommand(String input) {
+    /**
+     * Constructs an {@code UnmarkCommand} with the specified task index.
+     *
+     * @param input The raw input containing the task index to unmark.
+     * @throws InvalidFormatException If the input does not contain a valid index.
+     */
+    public UnmarkCommand(String input) throws InvalidFormatException {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
@@ -20,6 +29,13 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * Executes the unmark command, setting the specified task as not done.
+     *
+     * @param taskList The task list containing the task to unmark.
+     * @param ui The UI instance for user interaction.
+     * @param storage The storage system (not modified in this command).
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
