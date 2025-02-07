@@ -32,7 +32,7 @@ public class Storage {
      * @param taskList The list of tasks to save.
      * @throws ClankException If an error occurs while saving.
      */
-    public void saveTasks(TaskList taskList) {
+    public void saveTasks(TaskList taskList) throws ClankException {
         ArrayList<Task> tasks = taskList.getTasks();
         try {
             File file = new File(filePath);
@@ -60,7 +60,7 @@ public class Storage {
      * @return A list of tasks loaded from the file.
      * @throws ClankException If an error occurs while loading tasks.
      */
-    public ArrayList<Task> loadTasks() {
+    public ArrayList<Task> loadTasks() throws ClankException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
