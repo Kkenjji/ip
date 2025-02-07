@@ -1,6 +1,13 @@
 package clank.utility;
 
-import clank.command.*;
+import clank.command.AddCommand;
+import clank.command.ByeCommand;
+import clank.command.Command;
+import clank.command.DeleteCommand;
+import clank.command.ListCommand;
+import clank.command.MarkCommand;
+import clank.command.SaveCommand;
+import clank.command.UnmarkCommand;
 import clank.exception.UnknownCommandException;
 
 public class Parser {
