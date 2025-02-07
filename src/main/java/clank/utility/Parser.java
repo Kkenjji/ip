@@ -22,7 +22,7 @@ public class Parser {
      * @return The corresponding {@code Command} object.
      * @throws UnknownCommandException If the command is not recognized.
      */
-    public static Command parse(String input) {
+    public static Command parse(String input) throws UnknownCommandException {
         String[] parts = input.split(" ", 2);
         String mainCommand = parts[0].toLowerCase();
 
