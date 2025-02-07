@@ -22,7 +22,7 @@ public class TaskList {
      *
      * @param tasks The list of tasks.
      */
-    public TaskList(ArrayList<Task> tasks){
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -108,6 +108,12 @@ public class TaskList {
         listTasks();
     }
 
+    /**
+     * Finds and returns a list of tasks that contain the specified keyword in their description.
+     *
+     * @param keyword The keyword to search for within task descriptions.
+     * @return An {@code ArrayList} of tasks that match the given keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {

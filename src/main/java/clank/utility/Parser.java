@@ -34,6 +34,8 @@ public class Parser {
             return new ListCommand();
         case "save":
             return new SaveCommand();
+        case "find":
+            return new FindCommand(input);
         case "mark":
             return new MarkCommand(input);
         case "unmark":

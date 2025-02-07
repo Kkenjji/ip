@@ -1,9 +1,9 @@
 package clank.utility;
 
-import clank.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import clank.task.Task;
 
 /**
  * Handles user interactions for the Clank chatbot.
@@ -57,6 +57,12 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Displays a list of tasks that match the search keyword.
+     * If no tasks match, a message is displayed indicating no results were found.
+     *
+     * @param matchingTasks The list of tasks that contain the search keyword.
+     */
     public void showMatchingTasks(ArrayList<Task> matchingTasks) {
         if (matchingTasks.isEmpty()) {
             System.out.println("Sorry, but I can't seem to find any task with this keyword!");
