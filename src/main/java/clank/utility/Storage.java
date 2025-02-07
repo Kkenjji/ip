@@ -11,13 +11,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles loading and saving tasks to a file
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new Storage object with the specified file path.
+     *
+     * @param filePath The file path where tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the given task list to a file.
+     *
+     * @param taskList The list of tasks to save.
+     * @throws ClankException If an error occurs while saving.
+     */
     public void saveTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         try {
@@ -40,6 +54,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the file into an ArrayList.
+     *
+     * @return A list of tasks loaded from the file.
+     * @throws ClankException If an error occurs while loading tasks.
+     */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
