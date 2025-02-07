@@ -11,8 +11,19 @@ import clank.command.SaveCommand;
 import clank.command.UnmarkCommand;
 import clank.exception.UnknownCommandException;
 
+/**
+ * Parses user input and returns the corresponding command.
+ */
 public class Parser {
-    public static Command parse(String input) {
+
+    /**
+     * Parses the given input string and returns the appropriate command object.
+     *
+     * @param input The user input string.
+     * @return The corresponding {@code Command} object.
+     * @throws UnknownCommandException If the command is not recognized.
+     */
+    public static Command parse(String input) throws UnknownCommandException {
         String[] parts = input.split(" ", 2);
         String mainCommand = parts[0].toLowerCase();
 

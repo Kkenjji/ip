@@ -11,14 +11,28 @@ import clank.exception.ClankException;
 import clank.task.Task;
 import clank.task.TaskList;
 
+/**
+ * Handles loading and saving tasks to a file
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new Storage object with the specified file path.
+     *
+     * @param filePath The file path where tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public void saveTasks(TaskList taskList) {
+    /**
+     * Saves the given task list to a file.
+     *
+     * @param taskList The list of tasks to save.
+     * @throws ClankException If an error occurs while saving.
+     */
+    public void saveTasks(TaskList taskList) throws ClankException {
         ArrayList<Task> tasks = taskList.getTasks();
         try {
             File file = new File(filePath);
@@ -40,7 +54,13 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadTasks() {
+    /**
+     * Loads tasks from the file into an ArrayList.
+     *
+     * @return A list of tasks loaded from the file.
+     * @throws ClankException If an error occurs while loading tasks.
+     */
+    public ArrayList<Task> loadTasks() throws ClankException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);

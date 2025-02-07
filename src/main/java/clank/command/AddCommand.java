@@ -10,10 +10,21 @@ import clank.task.Todo;
 import clank.utility.Storage;
 import clank.utility.Ui;
 
+/**
+ * Represents a command to add a new task (Todo, Deadline, or Event).
+ */
 public class AddCommand extends Command {
     private final Task task;
 
-    public AddCommand(String input) {
+    /**
+     * Constructs an {@code AddCommand} based on the user's input.
+     * Determines the type of task (Todo, Deadline, or Event) and parses the input accordingly.
+     *
+     * @param input The raw input string from the user.
+     * @throws InvalidFormatException If the input does not match the expected format.
+     * @throws ClankException If an unknown task type is encountered.
+     */
+    public AddCommand(String input) throws InvalidFormatException, ClankException {
         String[] parts = input.split(" ", 2);
 
         String mainCommand = parts[0].toLowerCase();
@@ -62,6 +73,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes the add command by adding the task to the task list and saving it to storage.
+     *
+     * @param taskList The task list to modify.
+     * @param ui The UI instance to interact with the user.
+     * @param storage The storage system to save the updated task list.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(task);

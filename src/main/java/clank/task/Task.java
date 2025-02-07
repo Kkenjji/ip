@@ -1,37 +1,69 @@
 package clank.task;
 
+/**
+ * Represents a task in the task list.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a new Task with a given description.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns the status icon of the task.
+     *
+     * @return "X" if the task is done, otherwise a space.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return The task description.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void mark() {
         this.isDone = true;
     }
 
+    /**
+     * Unmarks the task, setting it as not done.
+     */
     public void unmark() {
         this.isDone = false;
     }
 
+    /**
+     * Converts the task to a string representation.
+     *
+     * @return The string representation of the task.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 
-    public abstract String toSaveFormat();
-
+    /**
+     * Converts the task to a format suitable for saving to a file.
+     *
+     * @return The formatted string for saving.
+     */
     public static Task fromSavedFormat(String line) {
         String[] parts = line.split("\\|");
 
@@ -81,4 +113,12 @@ public abstract class Task {
             return null;
         }
     }
+
+    /**
+     * Converts the task into a format suitable for saving to a file.
+     * Subclasses must implement this method to define their own save format.
+     *
+     * @return A formatted string representation of the task for storage.
+     */
+    public abstract String toSaveFormat();
 }

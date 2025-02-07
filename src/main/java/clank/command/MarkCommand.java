@@ -5,10 +5,19 @@ import clank.task.TaskList;
 import clank.utility.Storage;
 import clank.utility.Ui;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class MarkCommand extends Command {
     private int index;
 
-    public MarkCommand(String input) {
+    /**
+     * Constructs a {@code MarkCommand} with the specified task index.
+     *
+     * @param input The raw input containing the task index to mark.
+     * @throws InvalidFormatException If the input does not contain a valid index.
+     */
+    public MarkCommand(String input) throws InvalidFormatException {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
@@ -20,6 +29,13 @@ public class MarkCommand extends Command {
         }
     }
 
+    /**
+     * Executes the mark command, marking the specified task as done.
+     *
+     * @param taskList The task list containing the task to mark.
+     * @param ui The UI instance for user interaction.
+     * @param storage The storage system (not modified in this command).
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {

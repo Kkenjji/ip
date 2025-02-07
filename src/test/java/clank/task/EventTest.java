@@ -4,7 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the {@code Event} class.
+ */
 public class EventTest {
+
+    /**
+     * Tests the creation of an Event task and its string representation.
+     */
     @Test
     public void testEventCreation() {
         Event event = new Event("Team meeting", "1/3/2025 1000", "2/3/2025 1200");
@@ -12,6 +19,9 @@ public class EventTest {
                 event.toString());
     }
 
+    /**
+     * Tests that the save format of an Event task is correctly formatted.
+     */
     @Test
     public void testSaveFormat() {
         Event event = new Event("Team meeting", "1/3/2025 1000", "2/3/2025 1200");
