@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new InvalidFormatException();
+                throw new InvalidFormatException("delete <index> or delete all");
             }
             if (parts[1].toLowerCase().equals("all")) {
                 toDeleteAll = true;

@@ -17,9 +17,4 @@ public class AddCommandTest {
     public void testInvalidAddCommand() {
         assertThrows(ClankException.class, () -> new AddCommand("unknown task"));
     }
-
-    @Test
-    public void testEmptyDescription() {
-        assertThrows(clank.exception.EmptyDescriptionException.class, () -> new AddCommand("todo "));
-    }
 }

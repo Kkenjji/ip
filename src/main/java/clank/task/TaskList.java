@@ -41,7 +41,7 @@ public class TaskList {
             throw new IndexOutOfBoundsException();
         }
         tasks.get(index).mark();
-        System.out.println("Marked " + index + " as done.");
+        System.out.println("Marked " + (index + 1) + " as done.");
     }
 
     public void unmark(int index) {
@@ -49,7 +49,7 @@ public class TaskList {
             throw new IndexOutOfBoundsException();
         }
         tasks.get(index).unmark();
-        System.out.println("Unmarked " + index + ".");
+        System.out.println("Unmarked " + (index + 1) + ".");
     }
 
     public void deleteTask(int index, boolean toDeleteAll) throws InvalidFormatException {
@@ -59,7 +59,7 @@ public class TaskList {
             throw new IndexOutOfBoundsException();
         }
         tasks.remove(index);
-        System.out.println("I've successfully deleted task " + index +
+        System.out.println("I've successfully deleted task " + (index + 1) +
                 ". Here are your remaining tasks.");
         listTasks();
     }
