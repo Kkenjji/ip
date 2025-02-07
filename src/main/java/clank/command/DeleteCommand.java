@@ -1,9 +1,9 @@
 package clank.command;
 
-import clank.task.TaskList;
-import clank.utility.Ui;
-import clank.utility.Storage;
 import clank.exception.InvalidFormatException;
+import clank.task.TaskList;
+import clank.utility.Storage;
+import clank.utility.Ui;
 
 public class DeleteCommand extends Command {
     private int index;

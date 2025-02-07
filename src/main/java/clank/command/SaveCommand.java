@@ -1,8 +1,8 @@
 package clank.command;
 
 import clank.task.TaskList;
-import clank.utility.Ui;
 import clank.utility.Storage;
+import clank.utility.Ui;
 
 public class SaveCommand extends Command {
     @Override

@@ -1,10 +1,11 @@
 package clank.command;
 
-import clank.exception.ClankException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import clank.exception.ClankException;
 
 public class AddCommandTest {
     @Test

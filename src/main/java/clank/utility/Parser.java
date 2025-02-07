@@ -15,15 +15,23 @@ public class Parser {
         String[] parts = input.split(" ", 2);
         String mainCommand = parts[0].toLowerCase();
 
-        return switch (mainCommand) {
-            case "bye" -> new ByeCommand();
-            case "list" -> new ListCommand();
-            case "save" -> new SaveCommand();
-            case "mark" -> new MarkCommand(input);
-            case "unmark" -> new UnmarkCommand(input);
-            case "delete" -> new DeleteCommand(input);
-            case "todo", "deadline", "event" -> new AddCommand(input);
-            default -> throw new UnknownCommandException(mainCommand);
-        };
+        switch (mainCommand) {
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListCommand();
+        case "save":
+            return new SaveCommand();
+        case "mark":
+            return new MarkCommand(input);
+        case "unmark":
+            return new UnmarkCommand(input);
+        case "delete":
+            return new DeleteCommand(input);
+        case "todo", "deadline", "event":
+            return new AddCommand(input);
+        default:
+            throw new UnknownCommandException(mainCommand);
+        }
     }
 }

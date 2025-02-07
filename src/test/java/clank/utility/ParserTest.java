@@ -1,15 +1,15 @@
 package clank.utility;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import clank.command.AddCommand;
 import clank.command.ByeCommand;
 import clank.command.Command;
 import clank.command.ListCommand;
 import clank.exception.UnknownCommandException;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test

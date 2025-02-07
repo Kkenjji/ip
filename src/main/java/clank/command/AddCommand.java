@@ -1,14 +1,14 @@
 package clank.command;
 
+import clank.exception.ClankException;
 import clank.exception.InvalidFormatException;
 import clank.task.Deadline;
 import clank.task.Event;
 import clank.task.Task;
 import clank.task.TaskList;
 import clank.task.Todo;
-import clank.exception.ClankException;
-import clank.utility.Ui;
 import clank.utility.Storage;
+import clank.utility.Ui;
 
 public class AddCommand extends Command {
     private final Task task;
