@@ -1,5 +1,8 @@
 package clank.utility;
 
+import clank.task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -29,6 +32,20 @@ public class Ui {
 
     public void showError(String message) {
         System.out.println(message);
+    }
+
+    public void showMatchingTasks(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.println("Sorry, but I can't seem to find any task with this keyword!");
+        } else {
+            System.out.println("Here are the tasks I found in my database!\n"
+                    + "Take a look!");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                int index = i + 1;
+                Task task = matchingTasks.get(i);
+                System.out.println(index + "." + task);
+            }
+        }
     }
 
     public String readCommand() {

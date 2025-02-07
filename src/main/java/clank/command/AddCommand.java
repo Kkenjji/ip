@@ -22,7 +22,7 @@ public class AddCommand extends Command {
 
         switch (mainCommand) {
         case "todo":
-            if (details.length < 1 || details[0].trim().isEmpty()) {
+            if (details.length != 1 || details[0].trim().isEmpty()) {
                 throw new InvalidFormatException("todo <description>");
             }
 
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             System.out.println("Check it out!");
             break;
         case "deadline":
-            if (details.length < 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
+            if (details.length != 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
                 throw new InvalidFormatException("deadline <description> /by <d/M/yyyy HHmm>");
             }
 
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             System.out.println("Check it out!");
             break;
         case "event":
-            if (details.length < 3 || details[0].trim().isEmpty() || details[1].trim().isEmpty()
+            if (details.length != 3 || details[0].trim().isEmpty() || details[1].trim().isEmpty()
                     || details[2].trim().isEmpty()) {
                 throw new InvalidFormatException("event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
             }

@@ -4,6 +4,7 @@ import clank.command.AddCommand;
 import clank.command.ByeCommand;
 import clank.command.Command;
 import clank.command.DeleteCommand;
+import clank.command.FindCommand;
 import clank.command.ListCommand;
 import clank.command.MarkCommand;
 import clank.command.SaveCommand;
