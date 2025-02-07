@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public void showByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!\n");
+        System.out.println("Bye. Hope to see you again soon!");
     }
 
     public void showLoadingError() {

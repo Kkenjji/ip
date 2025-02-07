@@ -1,11 +1,11 @@
 package clank.command;
 
+import clank.exception.InvalidFormatException;
 import clank.task.Deadline;
 import clank.task.Event;
 import clank.task.Task;
 import clank.task.TaskList;
 import clank.task.Todo;
-import clank.exception.EmptyDescriptionException;
 import clank.exception.ClankException;
 import clank.utility.Ui;
 import clank.utility.Storage;
@@ -23,8 +23,7 @@ public class AddCommand extends Command {
         switch (mainCommand) {
         case "todo":
             if (details.length < 1 || details[0].trim().isEmpty()) {
-                throw new EmptyDescriptionException("A description is needed for a task! "
-                        + "The correct format is: 'todo description'");
+                throw new InvalidFormatException("todo <description>");
             }
 
             description = details[0].trim();
@@ -34,8 +33,7 @@ public class AddCommand extends Command {
             break;
         case "deadline":
             if (details.length < 2 || details[0].trim().isEmpty() || details[1].trim().isEmpty()) {
-                throw new EmptyDescriptionException("A description is needed for a task! "
-                        + "The correct format is: 'todo description'");
+                throw new InvalidFormatException("deadline <description> /by <d/M/yyyy HHmm>");
             }
 
             description = details[0].trim();
@@ -48,8 +46,7 @@ public class AddCommand extends Command {
         case "event":
             if (details.length < 3 || details[0].trim().isEmpty() || details[1].trim().isEmpty()
                     || details[2].trim().isEmpty()) {
-                throw new EmptyDescriptionException("A description is needed for a task! "
-                        + "The correct format is: 'todo description'");
+                throw new InvalidFormatException("event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
             }
 
             description = details[0].trim();

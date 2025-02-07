@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new InvalidFormatException();
+                throw new InvalidFormatException("mark <index>");
             }
             this.index = Integer.parseInt(parts[1]) - 1;
         } catch (NumberFormatException e) {
