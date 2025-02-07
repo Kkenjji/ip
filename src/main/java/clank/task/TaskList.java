@@ -11,7 +11,7 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks){
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -59,8 +59,8 @@ public class TaskList {
             throw new IndexOutOfBoundsException();
         }
         tasks.remove(index);
-        System.out.println("I've successfully deleted task " + (index + 1) +
-                ". Here are your remaining tasks.");
+        System.out.println("I've successfully deleted task " + (index + 1)
+                + ". Here are your remaining tasks.");
         listTasks();
     }
 }

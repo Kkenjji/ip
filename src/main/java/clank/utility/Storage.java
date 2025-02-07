@@ -1,15 +1,15 @@
 package clank.utility;
 
-import clank.exception.ClankException;
-import clank.task.Task;
-import clank.task.TaskList;
-
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import clank.exception.ClankException;
+import clank.task.Task;
+import clank.task.TaskList;
 
 public class Storage {
     private final String filePath;
