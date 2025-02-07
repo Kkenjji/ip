@@ -7,11 +7,20 @@ import clank.utility.Parser;
 import clank.utility.Storage;
 import clank.utility.Ui;
 
+/**
+ * The main class for the Clank chatbot.
+ * Clank is a simple task management chatbot that allows users to add,
+ * delete, list, and mark tasks as done.
+ */
 public class Clank {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Initializes the Clank chatbot with the specified file path for storage.
+     * @param filePath The file path where tasks are stored.
+     */
     public Clank(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +32,9 @@ public class Clank {
         }
     }
 
+    /**
+     * Runs the Clank chatbot, processing user commands until exit.
+     */
     public void run() {
         ui.showWelcomeMessage();
         ui.showLine();
@@ -42,6 +54,10 @@ public class Clank {
         }
     }
 
+    /**
+     * The main entry point of the Clank chatbot.
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         new Clank("./data/clank.txt").run();
     }
