@@ -32,6 +32,10 @@ application {
     mainClass.set("clank.Clank")
 }
 
+checkstyle {
+    toolVersion = '10.2'
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
