@@ -4,6 +4,7 @@ import clank.command.AddCommand;
 import clank.command.ByeCommand;
 import clank.command.Command;
 import clank.command.DeleteCommand;
+import clank.command.FindCommand;
 import clank.command.ListCommand;
 import clank.command.MarkCommand;
 import clank.command.SaveCommand;
@@ -19,6 +20,7 @@ public class Parser {
             case "bye" -> new ByeCommand();
             case "list" -> new ListCommand();
             case "save" -> new SaveCommand();
+            case "find" -> new FindCommand(input);
             case "mark" -> new MarkCommand(input);
             case "unmark" -> new UnmarkCommand(input);
             case "delete" -> new DeleteCommand(input);
