@@ -53,8 +53,8 @@ public class Event extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return "T|" + isDone + "|" + description
-                + "|" + start.format(INPUT_FORMATTER) + "|" + end.format(INPUT_FORMATTER);
+        return "T|" + isDone + "|" + description + "|" + start.format(INPUT_FORMATTER)
+                + "|" + end.format(INPUT_FORMATTER);
     }
 
     /**
