@@ -22,8 +22,8 @@ public class Ui {
      * Displays the welcome message to the user.
      */
     public void showWelcomeMessage() {
-        System.out.println("Greetings! I'm clank.Clank, Ratchet's best friend.\n"
-                + "I heard you are in trouble, and I'm here to help.\n"
+        System.out.println("Greetings! I'm Clank, and I'm from Saturn!\n"
+                + "I heard you need some help here.\n"
                 + "How may I assist you?");
     }
 
