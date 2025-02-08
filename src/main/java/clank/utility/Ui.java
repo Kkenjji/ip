@@ -85,4 +85,11 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
+
+    /**
+     * Closes the Scanner to free resources.
+     */
+    public void close() {
+        scanner.close();
+    }
 }
