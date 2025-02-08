@@ -73,12 +73,12 @@ public abstract class Task {
         }
 
         try {
-            String type = parts[0];
+            String taskType = parts[0];
             boolean isDone = Boolean.parseBoolean(parts[1]);
             String description = parts[2];
 
             Task task = null;
-            switch (type) {
+            switch (taskType) {
             case "T":
                 task = new Todo(description);
                 break;
