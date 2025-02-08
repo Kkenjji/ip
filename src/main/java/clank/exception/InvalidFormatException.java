@@ -11,7 +11,7 @@ public class InvalidFormatException extends ClankException {
      * @param format The expected format for the command.
      */
     public InvalidFormatException(String format) {
-        super("Oh no! The format is wrong! "
+        super("Oh no! The format is wrong!\n"
                 + "The correct format for this command is: "
                 + format);
     }
