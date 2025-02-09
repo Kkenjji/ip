@@ -30,14 +30,21 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image clankImage = new Image(this.getClass().getResourceAsStream("/images/Clank.png"));
 
+    /**
+     * Initializes the GUI components and ensures the scroll bar follows new messages.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Clank instance */
-    public void setClank(Clank d) {
-        clank = d;
+    /**
+     * Injects the Clank instance into the controller and displays the welcome message.
+     *
+     * @param clank The Clank chatbot instance.
+     */
+    public void setClank(Clank clank) {
+        clank = clank;
 
         String welcomeMessage = clank.getWelcomeMessage();
         dialogContainer.getChildren().add(DialogBox.getClankDialog(welcomeMessage, clankImage));

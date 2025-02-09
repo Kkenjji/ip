@@ -31,6 +31,11 @@ public class Ui {
                 + "How may I assist you?");
     }
 
+    /**
+     * Returns the welcome message displayed when Clank is launched.
+     *
+     * @return A string containing the introductory message from Clank.
+     */
     public String getWelcomeMessage() {
         return "Greetings! I'm Clank, and I'm from Saturn!\n"
                 + "I heard you need some help here.\n"
@@ -103,6 +108,15 @@ public class Ui {
         scanner.close();
     }
 
+    /**
+     * Executes the given command, capturing its output and returning it as a string.
+     *
+     * @param command The command to be executed.
+     * @param taskList The task list that the command may modify.
+     * @param storage The storage system used for saving or loading tasks.
+     * @return A string containing the command's output.
+     *         If an error occurs, returns an error message.
+     */
     public String executeCommand(Command command, TaskList taskList, Storage storage) {
         StringBuilder response = new StringBuilder();
         try {

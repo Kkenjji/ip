@@ -16,6 +16,11 @@ public class MainApp extends Application {
 
     private Clank clank = new Clank("./data/clank.txt");
 
+    /**
+     * Starts the JavaFX application by loading the GUI from an FXML file.
+     *
+     * @param stage The primary stage for this application.
+     */
     @Override
     public void start(Stage stage) {
         try {

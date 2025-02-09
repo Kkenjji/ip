@@ -24,6 +24,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox with the specified text and image.
+     *
+     * @param text The text content of the dialog.
+     * @param img The image representing the speaker.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -48,10 +54,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the user.
+     *
+     * @param text The user's input text.
+     * @param img The user's profile image.
+     * @return A DialogBox representing the user's message.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box for Clank.
+     *
+     * @param text The chatbot's response text.
+     * @param img The chatbot's profile image.
+     * @return A DialogBox representing Clank's message, flipped for proper alignment.
+     */
     public static DialogBox getClankDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
