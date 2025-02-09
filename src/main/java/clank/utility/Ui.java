@@ -1,9 +1,13 @@
 package clank.utility;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import clank.command.Command;
 import clank.task.Task;
+import clank.task.TaskList;
 
 /**
  * Handles user interactions for the Clank chatbot.
@@ -25,6 +29,17 @@ public class Ui {
         System.out.println("Greetings! I'm Clank, and I'm from Saturn!\n"
                 + "I heard you need some help here.\n"
                 + "How may I assist you?");
+    }
+
+    /**
+     * Returns the welcome message displayed when Clank is launched.
+     *
+     * @return A string containing the introductory message from Clank.
+     */
+    public String getWelcomeMessage() {
+        return "Greetings! I'm Clank, and I'm from Saturn!\n"
+                + "I heard you need some help here.\n"
+                + "How may I assist you?";
     }
 
     /**
@@ -91,5 +106,32 @@ public class Ui {
      */
     public void close() {
         scanner.close();
+    }
+
+    /**
+     * Executes the given command, capturing its output and returning it as a string.
+     *
+     * @param command The command to be executed.
+     * @param taskList The task list that the command may modify.
+     * @param storage The storage system used for saving or loading tasks.
+     * @return A string containing the command's output.
+     *         If an error occurs, returns an error message.
+     */
+    public String executeCommand(Command command, TaskList taskList, Storage storage) {
+        StringBuilder response = new StringBuilder();
+        try {
+            PrintStream originalOut = System.out;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream captureStream = new PrintStream(outputStream);
+            System.setOut(captureStream);
+
+            command.execute(taskList, this, storage);
+
+            System.setOut(originalOut);
+            response.append(outputStream);
+        } catch (Exception e) {
+            response.append("An error occurred: ").append(e.getMessage());
+        }
+        return response.toString().trim();
     }
 }
