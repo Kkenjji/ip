@@ -121,8 +121,8 @@ public class TaskList {
             for (String keyword : keywords) {
                 if (description.contains(keyword)) {
                     matchingTasks.add(task);
+                    break;
                 }
-                break;
             }
         }
         return matchingTasks;

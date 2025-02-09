@@ -12,7 +12,7 @@ import clank.utility.Ui;
  * Represents a command to find tasks that contain a specific keyword in their description.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private String[] keywords;
 
     /**
      * Constructs a {@code FindCommand} with the specified keyword.
@@ -22,10 +22,10 @@ public class FindCommand extends Command {
      */
     public FindCommand(String input) {
         String[] parts = input.split(" ");
-        if (parts.length != 2 || parts[1].trim().isEmpty()) {
+        if (parts.length < 2) {
             throw new InvalidFormatException("find <keyword>");
         }
-        this.keyword = parts[1].trim();
+        this.keywords = parts;
     }
 
     /**
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task> matchingTasks = taskList.findTasks(keyword);
+        ArrayList<Task> matchingTasks = taskList.findTasks(keywords);
         ui.showMatchingTasks(matchingTasks);
     }
 }
