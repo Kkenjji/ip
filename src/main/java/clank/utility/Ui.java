@@ -1,9 +1,13 @@
 package clank.utility;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import clank.command.Command;
 import clank.task.Task;
+import clank.task.TaskList;
 
 /**
  * Handles user interactions for the Clank chatbot.
@@ -25,6 +29,12 @@ public class Ui {
         System.out.println("Greetings! I'm Clank, and I'm from Saturn!\n"
                 + "I heard you need some help here.\n"
                 + "How may I assist you?");
+    }
+
+    public String getWelcomeMessage() {
+        return "Greetings! I'm Clank, and I'm from Saturn!\n"
+                + "I heard you need some help here.\n"
+                + "How may I assist you?";
     }
 
     /**
@@ -91,5 +101,23 @@ public class Ui {
      */
     public void close() {
         scanner.close();
+    }
+
+    public String executeCommand(Command command, TaskList taskList, Storage storage) {
+        StringBuilder response = new StringBuilder();
+        try {
+            PrintStream originalOut = System.out;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream captureStream = new PrintStream(outputStream);
+            System.setOut(captureStream);
+
+            command.execute(taskList, this, storage);
+
+            System.setOut(originalOut);
+            response.append(outputStream);
+        } catch (Exception e) {
+            response.append("An error occurred: ").append(e.getMessage());
+        }
+        return response.toString().trim();
     }
 }

@@ -61,4 +61,24 @@ public class Clank {
     public static void main(String[] args) {
         new Clank("./data/clank.txt").run();
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            if (command.isExit()) {
+                ui.showByeMessage();
+                return "Goodbye! See you again!";
+            }
+            return ui.executeCommand(command, taskList, storage);
+        } catch (ClankException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String getWelcomeMessage() {
+        return ui.getWelcomeMessage();
+    }
 }
