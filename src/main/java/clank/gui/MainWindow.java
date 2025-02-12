@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
      * @param clank The Clank chatbot instance.
      */
     public void setClank(Clank clank) {
-        clank = clank;
+        this.clank = clank;
 
         String welcomeMessage = clank.getWelcomeMessage();
         dialogContainer.getChildren().add(DialogBox.getClankDialog(welcomeMessage, clankImage));
