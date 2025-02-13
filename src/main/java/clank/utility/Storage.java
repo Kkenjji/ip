@@ -33,6 +33,9 @@ public class Storage {
      * @throws ClankException If an error occurs while saving.
      */
     public void saveTasks(TaskList taskList) throws ClankException {
+        assert taskList != null: "TaskList should not be null.";
+        assert taskList.getTasks() != null: "Tasks in taskList should not be null";
+
         ArrayList<Task> tasks = taskList.getTasks();
         try {
             File file = new File(filePath);

@@ -30,6 +30,7 @@ public class AddCommand extends Command {
 
         String mainCommand = parts[0].toLowerCase();
         String[] taskDetails = parts.length > 1 ? parts[1].split("/by | /from | /to ", 3) : new String[]{""};
+        assert taskDetails.length > 0 : "Task details should not be empty";
         String description = taskDetails[1];
 
         switch (mainCommand) {
@@ -92,6 +93,9 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "TaskList should not be null.";
+        assert storage != null : "Storage should not be null.";
+
         taskList.addTask(task);
         storage.saveTasks(taskList);
     }
