@@ -1,6 +1,9 @@
 package clank.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import clank.exception.InvalidFormatException;
 
@@ -52,11 +55,22 @@ public class TaskList {
             System.out.println("You currently have no task!");
         } else {
             System.out.println("Here are your current tasks:");
-            for (int i = 0; i < tasks.size(); i++) {
-                int index = i + 1;
-                Task task = tasks.get(i);
-                System.out.println(index + "." + task);
-            }
+            Stream.iterate(1, i -> i + 1)
+                    .limit(tasks.size())
+                    .map(i -> i + ". " + tasks.get(i - 1))
+                    .forEach(System.out::println);
+        }
+    }
+
+    /**
+     * Validates that the given task index is within the valid range of the task list.
+     *
+     * @param index The index of the task to validate (zero-based index).
+     * @throws IndexOutOfBoundsException If the index is out of range.
+     */
+    private void validateIndex(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid task index: " + (index + 1));
         }
     }
 
@@ -67,9 +81,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public void mark(int index) throws IndexOutOfBoundsException {
-        if ((index < 0) || (index > (tasks.size() - 1))) {
-            throw new IndexOutOfBoundsException();
-        }
+        validateIndex(index);
         tasks.get(index).mark();
         System.out.println("Marked " + (index + 1) + " as done.");
     }
@@ -81,9 +93,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public void unmark(int index) throws IndexOutOfBoundsException {
-        if ((index < 0) || (index > (tasks.size() - 1))) {
-            throw new IndexOutOfBoundsException();
-        }
+        validateIndex(index);
         tasks.get(index).unmark();
         System.out.println("Unmarked " + (index + 1) + ".");
     }
@@ -99,9 +109,11 @@ public class TaskList {
     public void deleteTask(int index, boolean toDeleteAll) throws IndexOutOfBoundsException {
         if (toDeleteAll) {
             tasks.clear();
-        } else if ((index < 0) || (index > (tasks.size() - 1))) {
-            throw new IndexOutOfBoundsException();
+            System.out.println("All tasks have been deleted.");
+            return;
         }
+
+        validateIndex(index);
         tasks.remove(index);
         System.out.println("I've successfully deleted task " + (index + 1)
                 + ". Here are your remaining tasks.");
@@ -109,22 +121,29 @@ public class TaskList {
     }
 
     /**
-     * Finds and returns a list of tasks that contain the specified keyword in their description.
+     * Finds and returns a list of tasks that contain any of the specified keywords in their description.
+     * The search is case-insensitive, meaning it matches regardless of capitalization.
      *
-     * @param keywords The keyword to search for within task descriptions.
-     * @return An {@code ArrayList} of tasks that match the given keyword.
+     * @param keywords The keywords to search for within task descriptions.
+     * @return An {@code ArrayList<Task>} containing tasks that match at least one of the given keywords.
      */
     public ArrayList<Task> findTasks(String... keywords) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            String description = task.getDescription();
-            for (String keyword : keywords) {
-                if (description.contains(keyword)) {
-                    matchingTasks.add(task);
-                    break;
-                }
-            }
-        }
-        return matchingTasks;
+        return tasks.stream()
+                .filter(task -> containsAnyKeyword(task.getDescription(), keywords))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Checks if a given task description contains any of the specified keywords.
+     * The comparison is case-insensitive.
+     *
+     * @param description The task description to be checked.
+     * @param keywords The array of keywords to match against the description.
+     * @return {@code true} if at least one keyword is found in the description, otherwise {@code false}.
+     */
+    private boolean containsAnyKeyword(String description, String... keywords) {
+        return Arrays.stream(keywords)
+                .map(String::toLowerCase)
+                .anyMatch(description::contains);
     }
 }

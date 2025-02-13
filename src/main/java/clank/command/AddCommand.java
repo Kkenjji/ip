@@ -18,11 +18,12 @@ public class AddCommand extends Command {
 
     /**
      * Constructs an {@code AddCommand} based on the user's input.
-     * Determines the type of task (Todo, Deadline, or Event) and parses the input accordingly.
+     * Parses the command to determine the type of task (Todo, Deadline, or Event)
+     * and initializes the corresponding task.
      *
      * @param input The raw input string from the user.
      * @throws InvalidFormatException If the input does not match the expected format.
-     * @throws ClankException If an unknown task type is encountered.
+     * @throws ClankException If the command type is unknown.
      */
     public AddCommand(String input) throws InvalidFormatException, ClankException {
         String[] parts = input.split(" ", 2);
@@ -30,48 +31,57 @@ public class AddCommand extends Command {
         String mainCommand = parts[0].toLowerCase();
         String[] taskDetails = parts.length > 1 ? parts[1].split("/by | /from | /to ", 3) : new String[]{""};
         assert taskDetails.length > 0 : "Task details should not be empty";
-        String description;
+        String description = taskDetails[1];
 
         switch (mainCommand) {
         case "todo":
-            if (taskDetails.length != 1 || taskDetails[0].trim().isEmpty()) {
-                throw new InvalidFormatException("todo <description>");
-            }
-
-            description = taskDetails[0].trim();
-            task = new Todo(description);
+            this.task = createTodo(taskDetails);
             System.out.println("I've added \"" + description + "\" as a todo!");
             System.out.println("Check it out!");
             break;
         case "deadline":
-            if (taskDetails.length != 2 || taskDetails[0].trim().isEmpty() || taskDetails[1].trim().isEmpty()) {
-                throw new InvalidFormatException("deadline <description> /by <d/M/yyyy HHmm>");
-            }
-
-            description = taskDetails[0].trim();
-            String by = taskDetails[1].trim();
-            task = new Deadline(description, by);
+            this.task = createDeadline(taskDetails);
             System.out.println("I've added \"" + description + "\" as a task with deadline!");
-            System.out.println("It is to be completed by " + by + ".");
             System.out.println("Check it out!");
             break;
         case "event":
-            if (taskDetails.length != 3 || taskDetails[0].trim().isEmpty() || taskDetails[1].trim().isEmpty()
-                    || taskDetails[2].trim().isEmpty()) {
-                throw new InvalidFormatException("event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
-            }
-
-            description = taskDetails[0].trim();
-            String start = taskDetails[1].trim();
-            String end = taskDetails[2].trim();
-            task = new Event(description, start, end);
+            this.task = createEvent(taskDetails);
             System.out.println("I've added \"" + description + "\" as an event!");
-            System.out.println("It is from " + start + " to " + end + ".");
             System.out.println("Check it out!");
             break;
         default:
             throw new ClankException("Unknown task type.");
         }
+    }
+
+    /**
+     * Creates a Todo task.
+     */
+    private Task createTodo(String[] taskDetails) throws InvalidFormatException {
+        if (taskDetails.length != 1 || taskDetails[0].trim().isEmpty()) {
+            throw new InvalidFormatException("todo <description>");
+        }
+        return new Todo(taskDetails[0].trim());
+    }
+
+    /**
+     * Creates a Deadline task.
+     */
+    private Task createDeadline(String[] taskDetails) throws InvalidFormatException {
+        if (taskDetails.length != 2 || taskDetails[0].trim().isEmpty() || taskDetails[1].trim().isEmpty()) {
+            throw new InvalidFormatException("deadline <description> /by <d/M/yyyy HHmm>");
+        }
+        return new Deadline(taskDetails[0].trim(), taskDetails[1].trim());
+    }
+
+    /**
+     * Creates an Event task.
+     */
+    private Task createEvent(String[] taskDetails) throws InvalidFormatException {
+        if (taskDetails.length != 3 || taskDetails[0].trim().isEmpty() || taskDetails[1].trim().isEmpty() || taskDetails[2].trim().isEmpty()) {
+            throw new InvalidFormatException("event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
+        }
+        return new Event(taskDetails[0].trim(), taskDetails[1].trim(), taskDetails[2].trim());
     }
 
     /**
