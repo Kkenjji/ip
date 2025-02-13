@@ -61,15 +61,25 @@ public class TaskList {
     }
 
     /**
+     * Validates that the given task index is within the valid range of the task list.
+     *
+     * @param index The index of the task to validate (zero-based index).
+     * @throws IndexOutOfBoundsException If the index is out of range.
+     */
+    private void validateIndex(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid task index: " + (index + 1));
+        }
+    }
+
+    /**
      * Marks the task at the specified index as done.
      *
      * @param index The index of the task to mark as done (zero-based index).
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public void mark(int index) throws IndexOutOfBoundsException {
-        if ((index < 0) || (index > (tasks.size() - 1))) {
-            throw new IndexOutOfBoundsException();
-        }
+        validateIndex(index);
         tasks.get(index).mark();
         System.out.println("Marked " + (index + 1) + " as done.");
     }
@@ -81,9 +91,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public void unmark(int index) throws IndexOutOfBoundsException {
-        if ((index < 0) || (index > (tasks.size() - 1))) {
-            throw new IndexOutOfBoundsException();
-        }
+        validateIndex(index);
         tasks.get(index).unmark();
         System.out.println("Unmarked " + (index + 1) + ".");
     }
@@ -99,9 +107,11 @@ public class TaskList {
     public void deleteTask(int index, boolean toDeleteAll) throws IndexOutOfBoundsException {
         if (toDeleteAll) {
             tasks.clear();
-        } else if ((index < 0) || (index > (tasks.size() - 1))) {
-            throw new IndexOutOfBoundsException();
+            System.out.println("All tasks have been deleted.");
+            return;
         }
+
+        validateIndex(index);
         tasks.remove(index);
         System.out.println("I've successfully deleted task " + (index + 1)
                 + ". Here are your remaining tasks.");
