@@ -38,6 +38,8 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "TaskList should not be null.";
+
         try {
             taskList.mark(index);
         } catch (IndexOutOfBoundsException e) {

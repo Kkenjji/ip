@@ -118,6 +118,9 @@ public class Ui {
      *         If an error occurs, returns an error message.
      */
     public String executeCommand(Command command, TaskList taskList, Storage storage) {
+        assert taskList != null : "TaskList should not be null.";
+        assert storage != null : "Storage should not be null.";
+
         StringBuilder response = new StringBuilder();
         try {
             PrintStream originalOut = System.out;

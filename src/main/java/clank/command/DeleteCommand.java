@@ -43,7 +43,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "TaskList should not be null";
+
         try {
+            assert index >= 0 && index < taskList.getTasks().size() : "Index out of bounds in delete.";
             taskList.deleteTask(index, toDeleteAll);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please specify a valid index!");
