@@ -60,9 +60,14 @@ public abstract class Task {
     }
 
     /**
-     * Converts the task to a format suitable for saving to a file.
+     * Parses a saved task string and converts it into a Task object.
+     * This method is used to restore tasks from a saved file.
      *
-     * @return The formatted string for saving.
+     * @param line The saved task string in the format "T|isDone|description" for Todo,
+     *             "D|isDone|description|by" for Deadline, and
+     *             "E|isDone|description|start|end" for Event.
+     * @return The corresponding {@code Task} object if parsing is successful,
+     *         otherwise {@code null} if the task is corrupted or unknown.
      */
     public static Task fromSavedFormat(String line) {
         String[] parts = line.split("\\|");
@@ -77,30 +82,11 @@ public abstract class Task {
             boolean isDone = Boolean.parseBoolean(parts[1]);
             String description = parts[2];
 
-            Task task = null;
-            switch (taskType) {
-            case "T":
-                task = new Todo(description);
-                break;
-            case "D":
-                if (parts.length < 4) {
-                    System.out.println("Corrupted deadline task. Date is missing.");
-                    return null;
-                }
-                String by = parts[3];
-                task = new Deadline(description, by);
-                break;
-            case "E":
-                if (parts.length < 5) {
-                    System.out.println("Corrupted event task. Dates are missing.");
-                    return null;
-                }
-                String start = parts[3];
-                String end = parts[4];
-                task = new Event(description, start, end);
-                break;
-            default:
-                System.out.println("Unknown task type.");
+            Task task = createTask(taskType, description, parts);
+
+            if (task == null) {
+                System.out.println("Unknown task type: " + taskType);
+                return null;
             }
 
             if (isDone) {
@@ -110,6 +96,37 @@ public abstract class Task {
             return task;
         } catch (Exception e) {
             System.out.println("Corrupted task.");
+            return null;
+        }
+    }
+
+    /**
+     * Creates a Task object based on the task type and its details.
+     * This method is used within {@code fromSavedFormat()} to construct the appropriate Task subclass.
+     *
+     * @param taskType The type of task ("T" for Todo, "D" for Deadline, "E" for Event).
+     * @param description The description of the task.
+     * @param parts The full array of task details parsed from the saved file.
+     * @return The corresponding {@code Task} object if creation is successful,
+     *         otherwise {@code null} if the task is corrupted or unknown.
+     */
+    private static Task createTask(String taskType, String description, String[] parts) {
+        switch (taskType) {
+        case "T":
+            return new Todo(description);
+        case "D":
+            if (parts.length < 4) {
+                System.out.println("Corrupted deadline task. Date is missing.");
+                return null;
+            }
+            return new Deadline(description, parts[3]);
+        case "E":
+            if (parts.length < 5) {
+                System.out.println("Corrupted event task. Start or End date is missing.");
+                return null;
+            }
+            return new Event(description, parts[3], parts[4]);
+        default:
             return null;
         }
     }
