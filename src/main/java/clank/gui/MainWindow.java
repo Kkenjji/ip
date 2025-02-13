@@ -57,17 +57,26 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = clank.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getClankDialog(response, clankImage)
-        );
+        String clankResponse = clank.getResponse(input);
+
+        displayResponse(input, clankResponse);
         userInput.clear();
 
         if (input.trim().equalsIgnoreCase("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished(event -> Platform.exit()); // Close app after delay
-            delay.play();
+            scheduleExit();
         }
+    }
+
+    private void displayResponse(String userMessage, String clankResponse) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userMessage, userImage),
+                DialogBox.getClankDialog(clankResponse, clankImage)
+        );
+    }
+
+    private void scheduleExit() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(event -> Platform.exit()); // Close app after delay
+        delay.play();
     }
 }
