@@ -95,6 +95,30 @@ public class Ui {
     }
 
     /**
+     * Displays a list of upcoming tasks to the user.
+     * If the method is called during application launch, it provides a different introductory message.
+     *
+     * @param upcomingTasks The list of upcoming tasks to be displayed.
+     * @param isLaunch {@code true} if this method is called at application startup,
+     *                 {@code false} if it is called manually (e.g., from a reminder command).
+     */
+    public void showUpcomingTasks(ArrayList<Task> upcomingTasks, boolean isLaunch) {
+        if (upcomingTasks.isEmpty()) {
+            if (!isLaunch) {
+                System.out.println("You have no upcoming tasks!");
+            }
+            return;
+        }
+
+        System.out.println(isLaunch ? "You have some upcoming tasks!" : "Here are your upcoming tasks!");
+
+        Stream.iterate(1, i -> i + 1)
+                .limit(upcomingTasks.size())
+                .map(i -> i + ". " + upcomingTasks.get(i - 1))
+                .forEach(System.out::println);
+    }
+
+    /**
      * Reads a command from user input.
      *
      * @return The user input as a string.

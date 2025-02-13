@@ -1,5 +1,6 @@
 package clank.task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -133,9 +134,28 @@ public class TaskList {
      * @param keywords The keywords to search for within task descriptions.
      * @return An {@code ArrayList<Task>} containing tasks that match at least one of the given keywords.
      */
-    public ArrayList<Task> findTasks(String... keywords) {
+    public ArrayList<Task> findTasksWithKeywords(String... keywords) {
         return tasks.stream()
                 .filter(task -> containsAnyKeyword(task.getDescription(), keywords))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Finds and retrieves a list of upcoming tasks with deadlines within the specified number of days.
+     *
+     * @param days The number of days ahead to check for upcoming deadlines.
+     * @return An {@code ArrayList<Task>} containing deadline tasks that are due within the next {@code days}.
+     */
+    public ArrayList<Task> findUpcomingTasks(long days) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime reminderThreshold = now.plusDays(days);
+
+        return tasks.stream()
+                .filter(task -> task instanceof Deadline)
+                .filter(task -> {
+                    LocalDateTime taskDate = ((Deadline) task).getBy();
+                    return taskDate.isBefore(reminderThreshold);
+                })
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
