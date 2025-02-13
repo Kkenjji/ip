@@ -28,7 +28,7 @@ public class MainApp extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setClank(clank);  // inject the Clank instance
+            fxmlLoader.<MainWindow>getController().setClank(clank); // inject the Clank instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

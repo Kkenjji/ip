@@ -72,7 +72,8 @@ public class AddCommand extends Command {
      * Creates an Event task.
      */
     private Task createEvent(String[] taskDetails) throws InvalidFormatException {
-        if (taskDetails.length != 3 || taskDetails[0].trim().isEmpty() || taskDetails[1].trim().isEmpty() || taskDetails[2].trim().isEmpty()) {
+        if (taskDetails.length != 3 || taskDetails[0].trim().isEmpty()
+                || taskDetails[1].trim().isEmpty() || taskDetails[2].trim().isEmpty()) {
             throw new InvalidFormatException("event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
         }
         return new Event(taskDetails[0].trim(), taskDetails[1].trim(), taskDetails[2].trim());
