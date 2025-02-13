@@ -1,6 +1,7 @@
 package clank;
 
 import clank.command.Command;
+import clank.command.ReminderCommand;
 import clank.exception.ClankException;
 import clank.task.TaskList;
 import clank.utility.Parser;
@@ -90,5 +91,18 @@ public class Clank {
      */
     public String getWelcomeMessage() {
         return ui.getWelcomeMessage();
+    }
+
+    /**
+     * Retrieves a list of upcoming tasks due within the next 3 days.
+     * This method creates and executes a {@code ReminderCommand} to fetch and format
+     * upcoming deadlines or events.
+     *
+     * @return A formatted string containing upcoming tasks, or a message indicating
+     *         no upcoming tasks.
+     */
+    public String getUpcomingTasksMessage() {
+        ReminderCommand reminderCommand = new ReminderCommand("reminder 3", true);
+        return ui.executeCommand(reminderCommand, taskList, storage);
     }
 }

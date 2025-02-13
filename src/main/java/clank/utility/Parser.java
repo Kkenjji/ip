@@ -7,6 +7,7 @@ import clank.command.DeleteCommand;
 import clank.command.FindCommand;
 import clank.command.ListCommand;
 import clank.command.MarkCommand;
+import clank.command.ReminderCommand;
 import clank.command.SaveCommand;
 import clank.command.UnmarkCommand;
 import clank.exception.UnknownCommandException;
@@ -42,6 +43,8 @@ public class Parser {
             return new UnmarkCommand(input);
         case "delete":
             return new DeleteCommand(input);
+        case "reminder":
+            return new ReminderCommand(input, false);
         case "todo", "deadline", "event":
             return new AddCommand(input);
         default:

@@ -41,7 +41,7 @@ public class FindCommand extends Command {
         assert taskList != null : "TaskList should not be null.";
         assert ui != null : "Ui should not be null.";
 
-        ArrayList<Task> matchingTasks = taskList.findTasks(keywords);
+        ArrayList<Task> matchingTasks = taskList.findTasksWithKeywords(keywords);
         ui.showMatchingTasks(matchingTasks);
     }
 }

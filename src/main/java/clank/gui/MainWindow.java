@@ -47,7 +47,10 @@ public class MainWindow extends AnchorPane {
         this.clank = clank;
 
         String welcomeMessage = clank.getWelcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getClankDialog(welcomeMessage, clankImage));
+        String upcomingTasksMessage = clank.getUpcomingTasksMessage();
+
+        dialogContainer.getChildren().add(DialogBox.getClankDialog(
+                welcomeMessage + "\n" + upcomingTasksMessage, clankImage));
     }
 
     /**
