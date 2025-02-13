@@ -45,6 +45,12 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        String message = "I've added \"" + task.getDescription() + "\" as "
+                + (task instanceof Deadline ? "a task with deadline!"
+                : task instanceof Event ? "an event!"
+                : "a todo!")
+                + "\nCheck it out!";
+        System.out.println(message);
     }
 
     /**

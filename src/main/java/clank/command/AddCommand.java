@@ -31,23 +31,17 @@ public class AddCommand extends Command {
         String mainCommand = parts[0].toLowerCase();
         String[] taskDetails = parts.length > 1 ? parts[1].split("/by | /from | /to ", 3) : new String[]{""};
         assert taskDetails.length > 0 : "Task details should not be empty";
-        String description = taskDetails[1];
+        String description = taskDetails[0].trim();
 
         switch (mainCommand) {
         case "todo":
             this.task = createTodo(taskDetails);
-            System.out.println("I've added \"" + description + "\" as a todo!");
-            System.out.println("Check it out!");
             break;
         case "deadline":
             this.task = createDeadline(taskDetails);
-            System.out.println("I've added \"" + description + "\" as a task with deadline!");
-            System.out.println("Check it out!");
             break;
         case "event":
             this.task = createEvent(taskDetails);
-            System.out.println("I've added \"" + description + "\" as an event!");
-            System.out.println("Check it out!");
             break;
         default:
             throw new ClankException("Unknown task type.");
