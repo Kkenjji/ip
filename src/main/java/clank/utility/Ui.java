@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import clank.command.Command;
 import clank.task.Task;
@@ -81,15 +82,16 @@ public class Ui {
     public void showMatchingTasks(ArrayList<Task> matchingTasks) {
         if (matchingTasks.isEmpty()) {
             System.out.println("Sorry, but I can't seem to find any task with this keyword!");
-        } else {
-            System.out.println("Here are the tasks I found in my database!\n"
-                    + "Take a look!");
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                int index = i + 1;
-                Task task = matchingTasks.get(i);
-                System.out.println(index + "." + task);
-            }
+            return;
         }
+
+        System.out.println("Here are the tasks I found in my database!\n"
+                + "Take a look!");
+
+        Stream.iterate(1, i -> i + 1)
+                .limit(matchingTasks.size())
+                .map(i -> i + ". " + matchingTasks.get(i - 1))
+                .forEach(System.out::println);
     }
 
     /**
