@@ -1,6 +1,9 @@
 package clank.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import clank.exception.InvalidFormatException;
 
@@ -52,11 +55,10 @@ public class TaskList {
             System.out.println("You currently have no task!");
         } else {
             System.out.println("Here are your current tasks:");
-            for (int i = 0; i < tasks.size(); i++) {
-                int index = i + 1;
-                Task task = tasks.get(i);
-                System.out.println(index + "." + task);
-            }
+            Stream.iterate(1, i -> i + 1)
+                    .limit(tasks.size())
+                    .map(i -> i + ". " + tasks.get(i - 1))
+                    .forEach(System.out::println);
         }
     }
 
@@ -109,22 +111,29 @@ public class TaskList {
     }
 
     /**
-     * Finds and returns a list of tasks that contain the specified keyword in their description.
+     * Finds and returns a list of tasks that contain any of the specified keywords in their description.
+     * The search is case-insensitive, meaning it matches regardless of capitalization.
      *
-     * @param keywords The keyword to search for within task descriptions.
-     * @return An {@code ArrayList} of tasks that match the given keyword.
+     * @param keywords The keywords to search for within task descriptions.
+     * @return An {@code ArrayList<Task>} containing tasks that match at least one of the given keywords.
      */
     public ArrayList<Task> findTasks(String... keywords) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            String description = task.getDescription();
-            for (String keyword : keywords) {
-                if (description.contains(keyword)) {
-                    matchingTasks.add(task);
-                    break;
-                }
-            }
-        }
-        return matchingTasks;
+        return tasks.stream()
+                .filter(task -> containsAnyKeyword(task.getDescription(), keywords))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Checks if a given task description contains any of the specified keywords.
+     * The comparison is case-insensitive.
+     *
+     * @param description The task description to be checked.
+     * @param keywords The array of keywords to match against the description.
+     * @return {@code true} if at least one keyword is found in the description, otherwise {@code false}.
+     */
+    private boolean containsAnyKeyword(String description, String... keywords) {
+        return Arrays.stream(keywords)
+                .map(String::toLowerCase)
+                .anyMatch(description::contains);
     }
 }
