@@ -8,6 +8,10 @@ import clank.task.TaskList;
 import clank.utility.Storage;
 import clank.utility.Ui;
 
+/**
+ * Represents a command that retrieves and displays upcoming tasks within a specified number of days.
+ * This command can be triggered manually by the user or automatically at application startup.
+ */
 public class ReminderCommand extends Command {
     private long days;
     private boolean isLaunch;
