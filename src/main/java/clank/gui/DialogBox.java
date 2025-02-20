@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -42,6 +43,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        this.setSpacing(15);
+        dialog.setWrapText(true);
+        dialog.setMaxWidth(259);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.setPrefHeight(Region.USE_COMPUTED_SIZE);
     }
 
     /**
@@ -62,7 +68,17 @@ public class DialogBox extends HBox {
      * @return A DialogBox representing the user's message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_RIGHT);
+        db.dialog.setStyle("-fx-background-color: #9cd3ff; "
+                + "-fx-text-fill: black; "
+                + "-fx-background-radius: 10; "
+                + "-fx-padding: 10; "
+                + "-fx-border-color: #038cfc; "
+                + "-fx-border-radius: 10; "
+                + "-fx-border-width: 3px;"
+        );
+        return db;
     }
 
     /**
@@ -73,8 +89,17 @@ public class DialogBox extends HBox {
      * @return A DialogBox representing Clank's message, flipped for proper alignment.
      */
     public static DialogBox getClankDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
+        db.setAlignment(Pos.CENTER_LEFT);
+        db.dialog.setStyle("-fx-background-color: #fdcaa2; "
+                + "-fx-text-fill: black; "
+                + "-fx-background-radius: 10; "
+                + "-fx-padding: 10; "
+                + "-fx-border-color: #E26313; "
+                + "-fx-border-radius: 10; "
+                + "-fx-border-width: 3px;"
+        );
         return db;
     }
 }

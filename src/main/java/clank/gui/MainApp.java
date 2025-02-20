@@ -32,7 +32,8 @@ public class MainApp extends Application {
             fxmlLoader.<MainWindow>getController().setClank(clank); // inject the Clank instance
 
             stage.setTitle("Clank");
-
+            stage.setMinWidth(400);
+            stage.setMinHeight(600);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

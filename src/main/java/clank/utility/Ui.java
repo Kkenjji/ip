@@ -27,7 +27,7 @@ public class Ui {
      * Displays the welcome message to the user.
      */
     public void showWelcomeMessage() {
-        System.out.println("Greetings! I'm Clank, and I'm from Saturn!\n"
+        System.out.println("Greetings! I'm Clank, Ratchet's best friend!\n"
                 + "I heard you need some help here.\n"
                 + "How may I assist you?");
     }
@@ -38,7 +38,7 @@ public class Ui {
      * @return A string containing the introductory message from Clank.
      */
     public String getWelcomeMessage() {
-        return "Greetings! I'm Clank, and I'm from Saturn!\n"
+        return "Greetings! I'm Clank, Ratchet's best friend!\n"
                 + "I heard you need some help here.\n"
                 + "How may I assist you?";
     }
