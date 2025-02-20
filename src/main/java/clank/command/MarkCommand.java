@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,"mark <index>");
+                throw new ClankException(ClankException.ErrorType.INVALID_FORMAT, "mark <index>");
             }
             this.index = Integer.parseInt(parts[1]) - 1;
         } catch (NumberFormatException e) {

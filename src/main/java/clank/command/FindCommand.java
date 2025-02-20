@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     public FindCommand(String input) throws ClankException {
         String[] parts = input.split(" ");
         if (parts.length < 2) {
-            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,"find <keyword>");
+            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT, "find <keyword>");
         }
         this.keywords = parts;
     }
