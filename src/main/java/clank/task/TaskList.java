@@ -52,6 +52,7 @@ public class TaskList {
                 : "a todo!")
                 + "\nCheck it out!";
         System.out.println(message);
+        listTasks();
     }
 
     /**

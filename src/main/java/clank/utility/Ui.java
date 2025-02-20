@@ -61,7 +61,8 @@ public class Ui {
      * Displays an error message when loading tasks fails.
      */
     public void showLoadingError() {
-        System.out.println("Oh no! I've failed to load tasks from the file.");
+        System.out.println("Oh no! I've failed to load tasks from the file. "
+                + "Let me try to fix it with my wrench!");
     }
 
     /**
