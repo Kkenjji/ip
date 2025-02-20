@@ -4,7 +4,7 @@ import clank.gui.MainApp;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Launcher for the Clank application.
  */
 public class Launcher {
 
