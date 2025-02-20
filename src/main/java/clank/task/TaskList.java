@@ -118,7 +118,7 @@ public class TaskList {
     public void deleteTask(int index, boolean toDeleteAll) throws ClankException, IndexOutOfBoundsException {
         if (toDeleteAll) {
             tasks.clear();
-            System.out.println("All tasks have been deleted.");
+            System.out.println("Alright! I've deleted all the tasks!");
             return;
         }
 
