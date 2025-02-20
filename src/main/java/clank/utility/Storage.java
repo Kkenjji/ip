@@ -53,7 +53,7 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            throw new ClankException("Failed to save tasks.");
+            throw new ClankException(ClankException.ErrorType.FAILED_TO_SAVE, "");
         }
     }
 
@@ -82,7 +82,7 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
-            throw new ClankException("Failed to load tasks.");
+            throw new ClankException(ClankException.ErrorType.FAILED_TO_LOAD, "");
         }
         return tasks;
     }

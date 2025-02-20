@@ -1,6 +1,6 @@
 package clank.command;
 
-import clank.exception.InvalidFormatException;
+import clank.exception.ClankException;
 import clank.task.TaskList;
 import clank.utility.Storage;
 import clank.utility.Ui;
@@ -17,13 +17,14 @@ public class DeleteCommand extends Command {
      * Parses whether a specific task should be deleted or if all tasks should be removed.
      *
      * @param input The raw input string from the user.
-     * @throws InvalidFormatException If the input does not match the expected format.
+     * @throws ClankException If the input does not match the expected format.
      */
-    public DeleteCommand(String input) throws InvalidFormatException {
+    public DeleteCommand(String input) throws ClankException {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new InvalidFormatException("delete <index> or delete all");
+                throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,
+                        "delete <index> or delete all");
             }
             if (parts[1].toLowerCase().equals("all")) {
                 toDeleteAll = true;

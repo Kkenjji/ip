@@ -10,7 +10,7 @@ import clank.command.MarkCommand;
 import clank.command.ReminderCommand;
 import clank.command.SaveCommand;
 import clank.command.UnmarkCommand;
-import clank.exception.UnknownCommandException;
+import clank.exception.ClankException;
 
 /**
  * Parses user input and returns the corresponding command.
@@ -22,9 +22,9 @@ public class Parser {
      *
      * @param input The user input string.
      * @return The corresponding {@code Command} object.
-     * @throws UnknownCommandException If the command is not recognized.
+     * @throws ClankException If the command is not recognized.
      */
-    public static Command parse(String input) throws UnknownCommandException {
+    public static Command parse(String input) throws ClankException {
         String[] parts = input.split(" ", 2);
         String mainCommand = parts[0].toLowerCase();
 
@@ -48,7 +48,7 @@ public class Parser {
         case "todo", "deadline", "event":
             return new AddCommand(input);
         default:
-            throw new UnknownCommandException(mainCommand);
+            throw new ClankException(ClankException.ErrorType.UNKNOWN_COMMAND, "");
         }
     }
 }

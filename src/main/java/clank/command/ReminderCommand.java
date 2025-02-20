@@ -2,7 +2,7 @@ package clank.command;
 
 import java.util.ArrayList;
 
-import clank.exception.InvalidFormatException;
+import clank.exception.ClankException;
 import clank.task.Task;
 import clank.task.TaskList;
 import clank.utility.Storage;
@@ -23,13 +23,14 @@ public class ReminderCommand extends Command {
      * @param input The raw input string containing the reminder command and number of days.
      * @param isLaunch {@code true} if the command is triggered at application startup,
      *                 {@code false} if triggered manually.
-     * @throws InvalidFormatException If the input format is incorrect (e.g., missing the number of days).
+     * @throws ClankException If the input format is incorrect (e.g., missing the number of days).
      */
-    public ReminderCommand(String input, boolean isLaunch) throws InvalidFormatException {
+    public ReminderCommand(String input, boolean isLaunch) throws ClankException {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new InvalidFormatException("reminder <number of days>");
+                throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,
+                        "reminder <number of days>");
             }
 
             this.days = Integer.parseInt(parts[1]);

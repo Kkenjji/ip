@@ -9,7 +9,7 @@ import clank.command.AddCommand;
 import clank.command.ByeCommand;
 import clank.command.Command;
 import clank.command.ListCommand;
-import clank.exception.UnknownCommandException;
+import clank.exception.ClankException;
 
 /**
  * Unit tests for the {@code Parser} class.
@@ -48,6 +48,6 @@ public class ParserTest {
      */
     @Test
     public void testParseUnknownCommand() {
-        assertThrows(UnknownCommandException.class, () -> Parser.parse("unknownCommand"));
+        assertThrows(ClankException.class, () -> Parser.parse("unknownCommand"));
     }
 }

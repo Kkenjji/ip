@@ -28,7 +28,7 @@ public class Deadline extends Task {
         try {
             this.by = parseDateTime(by);
         } catch (DateTimeParseException e) {
-            throw new ClankException("Error parsing deadline");
+            throw new ClankException(ClankException.ErrorType.FAILED_TO_PARSE, "");
         }
     }
 

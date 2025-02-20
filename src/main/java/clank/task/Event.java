@@ -31,7 +31,7 @@ public class Event extends Task {
             this.start = parseDateTime(start);
             this.end = parseDateTime(end);
         } catch (DateTimeParseException e) {
-            throw new ClankException("Error parsing event");
+            throw new ClankException(ClankException.ErrorType.FAILED_TO_PARSE, "");
         }
     }
 

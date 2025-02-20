@@ -2,7 +2,7 @@ package clank.command;
 
 import java.util.ArrayList;
 
-import clank.exception.InvalidFormatException;
+import clank.exception.ClankException;
 import clank.task.Task;
 import clank.task.TaskList;
 import clank.utility.Storage;
@@ -18,12 +18,12 @@ public class FindCommand extends Command {
      * Constructs a {@code FindCommand} with the specified keyword.
      *
      * @param input The raw user input containing the keyword.
-     * @throws InvalidFormatException If the input format is incorrect or the keyword is missing.
+     * @throws ClankException If the input format is incorrect or the keyword is missing.
      */
-    public FindCommand(String input) {
+    public FindCommand(String input) throws ClankException {
         String[] parts = input.split(" ");
         if (parts.length < 2) {
-            throw new InvalidFormatException("find <keyword>");
+            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,"find <keyword>");
         }
         this.keywords = parts;
     }

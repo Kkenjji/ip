@@ -1,6 +1,6 @@
 package clank.command;
 
-import clank.exception.InvalidFormatException;
+import clank.exception.ClankException;
 import clank.task.TaskList;
 import clank.utility.Storage;
 import clank.utility.Ui;
@@ -15,13 +15,13 @@ public class MarkCommand extends Command {
      * Constructs a {@code MarkCommand} with the specified task index.
      *
      * @param input The raw input containing the task index to mark.
-     * @throws InvalidFormatException If the input does not contain a valid index.
+     * @throws ClankException If the input does not contain a valid index.
      */
-    public MarkCommand(String input) throws InvalidFormatException {
+    public MarkCommand(String input) throws ClankException {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new InvalidFormatException("mark <index>");
+                throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,"mark <index>");
             }
             this.index = Integer.parseInt(parts[1]) - 1;
         } catch (NumberFormatException e) {

@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import clank.exception.InvalidFormatException;
+import clank.exception.ClankException;
+
 
 /**
  * Represents a list of tasks.
@@ -111,10 +112,10 @@ public class TaskList {
      *
      * @param index The index of the task to delete (zero-based index).
      * @param toDeleteAll If true, deletes all tasks in the list.
-     * @throws InvalidFormatException If an invalid format is encountered.
+     * @throws ClankException If an invalid format is encountered.
      * @throws IndexOutOfBoundsException If the index is out of range when deleting a single task.
      */
-    public void deleteTask(int index, boolean toDeleteAll) throws IndexOutOfBoundsException {
+    public void deleteTask(int index, boolean toDeleteAll) throws ClankException, IndexOutOfBoundsException {
         if (toDeleteAll) {
             tasks.clear();
             System.out.println("All tasks have been deleted.");

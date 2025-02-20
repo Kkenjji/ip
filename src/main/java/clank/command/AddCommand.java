@@ -1,7 +1,6 @@
 package clank.command;
 
 import clank.exception.ClankException;
-import clank.exception.InvalidFormatException;
 import clank.task.Deadline;
 import clank.task.Event;
 import clank.task.Task;
@@ -22,10 +21,10 @@ public class AddCommand extends Command {
      * and initializes the corresponding task.
      *
      * @param input The raw input string from the user.
-     * @throws InvalidFormatException If the input does not match the expected format.
-     * @throws ClankException If the command type is unknown.
+     * @throws ClankException If the input does not match the expected format
+     *                        or if the command type is unknown.
      */
-    public AddCommand(String input) throws InvalidFormatException, ClankException {
+    public AddCommand(String input) throws ClankException {
         String[] parts = input.split(" ", 2);
 
         String mainCommand = parts[0].toLowerCase();
@@ -43,16 +42,16 @@ public class AddCommand extends Command {
             this.task = createEvent(taskDetails);
             break;
         default:
-            throw new ClankException("Unknown task type.");
+            throw new ClankException(ClankException.ErrorType.UNKNOWN_TASK_TYPE, "");
         }
     }
 
     /**
      * Creates a Todo task.
      */
-    private Task createTodo(String[] taskDetails) throws InvalidFormatException {
+    private Task createTodo(String[] taskDetails) throws ClankException {
         if (taskDetails.length != 1 || taskDetails[0].trim().isEmpty()) {
-            throw new InvalidFormatException("todo <description>");
+            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT, "todo <description>");
         }
         return new Todo(taskDetails[0].trim());
     }
@@ -60,9 +59,10 @@ public class AddCommand extends Command {
     /**
      * Creates a Deadline task.
      */
-    private Task createDeadline(String[] taskDetails) throws InvalidFormatException {
+    private Task createDeadline(String[] taskDetails) throws ClankException {
         if (taskDetails.length != 2 || taskDetails[0].trim().isEmpty() || taskDetails[1].trim().isEmpty()) {
-            throw new InvalidFormatException("deadline <description> /by <d/M/yyyy HHmm>");
+            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,
+                    "deadline <description> /by <d/M/yyyy HHmm>");
         }
         return new Deadline(taskDetails[0].trim(), taskDetails[1].trim());
     }
@@ -70,10 +70,11 @@ public class AddCommand extends Command {
     /**
      * Creates an Event task.
      */
-    private Task createEvent(String[] taskDetails) throws InvalidFormatException {
+    private Task createEvent(String[] taskDetails) throws ClankException {
         if (taskDetails.length != 3 || taskDetails[0].trim().isEmpty()
                 || taskDetails[1].trim().isEmpty() || taskDetails[2].trim().isEmpty()) {
-            throw new InvalidFormatException("event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
+            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,
+                    "event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
         }
         return new Event(taskDetails[0].trim(), taskDetails[1].trim(), taskDetails[2].trim());
     }

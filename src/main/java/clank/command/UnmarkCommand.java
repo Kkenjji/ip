@@ -1,6 +1,6 @@
 package clank.command;
 
-import clank.exception.InvalidFormatException;
+import clank.exception.ClankException;
 import clank.task.TaskList;
 import clank.utility.Storage;
 import clank.utility.Ui;
@@ -15,13 +15,14 @@ public class UnmarkCommand extends Command {
      * Constructs an {@code UnmarkCommand} with the specified task index.
      *
      * @param input The raw input containing the task index to unmark.
-     * @throws InvalidFormatException If the input does not contain a valid index.
+     * @throws ClankException If the input does not contain a valid index.
      */
-    public UnmarkCommand(String input) throws InvalidFormatException {
+    public UnmarkCommand(String input) throws ClankException {
         try {
             String[] parts = input.split(" ");
             if (parts.length != 2) {
-                throw new InvalidFormatException("unmark <index>");
+                throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,
+                        "unmark <index>");
             }
             this.index = Integer.parseInt(parts[1]) - 1;
         } catch (NumberFormatException e) {
