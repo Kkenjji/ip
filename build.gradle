@@ -52,7 +52,7 @@ checkstyle {
 }
 
 shadowJar {
-    archiveFileName = "clank.jar"
+    archiveFileName = "Clank.jar"
 }
 
 run{
