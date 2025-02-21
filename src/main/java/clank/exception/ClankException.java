@@ -50,14 +50,7 @@ public class ClankException extends RuntimeException {
          * The message advises the user to check for potential loading problems.
          */
         FAILED_TO_LOAD("I seem to have encountered problems loading the tasks."
-                + "Could you help me check what the problem is?"),
-
-        /**
-         * Represents an error that occurs when the chatbot encounters an issue parsing input.
-         * This might happen if an unexpected input format is provided.
-         * The message notifies the user that a parsing error has occurred.
-         */
-        FAILED_TO_PARSE("I am facing some errors here when parsing.");
+                + "Could you help me check what the problem is?");
 
         private final String message;
 
