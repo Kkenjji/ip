@@ -27,7 +27,7 @@ public class DeleteCommandTest {
     @BeforeEach
     public void setUp() {
         taskList = new TaskList();
-        storage = new Storage("testData.txt");
+        storage = new Storage("./data/testData.txt");
         ui = new Ui();
     }
 
