@@ -2,7 +2,7 @@
 
 ---
 
-Clank is a intelligent **task management chatbot** that helps you stay organized and productive.
+Clank is an intelligent **task management chatbot** that helps you stay organized and productive.
 With simple and easy-to-understand commands, track your todos, homework deadlines, or even 
 upcoming event easily and never lose track and forget about them again!
 
