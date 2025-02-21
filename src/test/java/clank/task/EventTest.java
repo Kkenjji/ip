@@ -25,6 +25,6 @@ public class EventTest {
     @Test
     public void testSaveFormat() {
         Event event = new Event("Team meeting", "1/3/2025 1000", "2/3/2025 1200");
-        assertEquals("T|false|Team meeting|1/3/2025 1000|2/3/2025 1200", event.toSaveFormat());
+        assertEquals("E|false|Team meeting|1/3/2025 1000|2/3/2025 1200", event.toSaveFormat());
     }
 }
