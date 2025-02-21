@@ -3,6 +3,7 @@ package clank.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 import clank.exception.ClankException;
 
@@ -10,9 +11,10 @@ import clank.exception.ClankException;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter INPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm", Locale.US);
     private static final DateTimeFormatter OUTPUT_FORMATTER =
-            DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
+            DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a", Locale.US);
 
     protected LocalDateTime by;
 
