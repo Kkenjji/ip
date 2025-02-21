@@ -31,7 +31,8 @@ public class Event extends Task {
             this.start = parseDateTime(start);
             this.end = parseDateTime(end);
         } catch (DateTimeParseException e) {
-            throw new ClankException(ClankException.ErrorType.FAILED_TO_PARSE, "");
+            throw new ClankException(ClankException.ErrorType.INVALID_FORMAT,
+                    "event <description> /from d/M/yyyy HHmm /to <d/M/yyyy HHmm>");
         }
     }
 
@@ -53,7 +54,7 @@ public class Event extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return "T|" + isDone + "|" + description + "|" + start.format(INPUT_FORMATTER)
+        return "E|" + isDone + "|" + description + "|" + start.format(INPUT_FORMATTER)
                 + "|" + end.format(INPUT_FORMATTER);
     }
 

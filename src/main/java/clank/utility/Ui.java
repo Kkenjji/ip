@@ -111,7 +111,8 @@ public class Ui {
             return;
         }
 
-        System.out.println(isLaunch ? "You have some upcoming tasks!" : "Here are your upcoming tasks!");
+        System.out.println(isLaunch ? "By the way, you have some upcoming tasks!"
+                                    : "Here are your upcoming tasks!");
 
         Stream.iterate(1, i -> i + 1)
                 .limit(upcomingTasks.size())

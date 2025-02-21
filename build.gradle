@@ -53,8 +53,6 @@ checkstyle {
 
 shadowJar {
     archiveFileName = "clank.jar"
-    // archiveBaseName = "duke"
-    // archiveClassifier = null
 }
 
 run{
