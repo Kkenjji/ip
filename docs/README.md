@@ -76,7 +76,7 @@ delete all
 ### 🔍  3. Viewing & Searching Tasks
 - List all tasks:
 ```
-- list
+list
 ```
 ✓ Displays all your tasks.
 
